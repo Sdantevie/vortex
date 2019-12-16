@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:vortex/screens/characters/characters.dart';
+import 'package:vortex/screens/explore/explore.dart';
+import 'package:vortex/screens/favourite/favourite.dart';
+import 'package:vortex/screens/home/home.dart';
+import 'package:vortex/screens/settings/settings.dart';
 
 class AppContainer extends StatefulWidget {
   AppContainer({Key key}) : super(key: key);
@@ -9,6 +14,23 @@ class AppContainer extends StatefulWidget {
 }
 
 class _AppContainerState extends State<AppContainer> {
+  int _selectedIndex = 0;
+
+  List<Widget> _views = [
+    Home(),
+    Explore(),
+    Favourite(),
+    Characters(),
+    Settings()
+  ];
+
+  _itemTapped(int index) {
+    print(index);
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
@@ -22,38 +44,50 @@ class _AppContainerState extends State<AppContainer> {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Color(0xFF040313), Color(0xFF2A2E3D)],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          tileMode: TileMode.clamp,
-          stops: [0.0, 1.0]),
+            colors: [Color(0xFF040313), Color(0xFF2A2E3D)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            tileMode: TileMode.clamp,
+            stops: [0.0, 1.0]),
       ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Container(
-          child: Stack(
-            fit: StackFit.expand,
-            children: <Widget>[
-               Positioned(
-                 top: 16,
-                 left: 16,
-                 child:  Image.asset(
-                "assets/images/vortex247.png",
-                width: ScreenUtil.getInstance().setWidth(70),
-                height: ScreenUtil.getInstance().setHeight(70),),)
-            ],
-          ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Color(0xFF2A2E3D),
-          selectedItemColor: Color(0xFFD71786),
-          type: BottomNavigationBarType.fixed,
-          items: _bottomNavigationData.map((data){
-            return BottomNavigationBarItem(
-              icon: Icon(data.icon, color: Color(0xFFFF691F)), 
-              title: Text(data.title, style: TextStyle(color: Color(0xFFFF691F),)));
-          }).toList()
-        )
+      child: Padding(
+        padding: const EdgeInsets.only(top: 45.0),
+        child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Container(
+              child: Stack(
+                fit: StackFit.expand,
+                children: <Widget>[
+                  Positioned(
+                    top: 16,
+                    left: 16,
+                    child: Image.asset(
+                      "assets/images/vortex247.png",
+                      width: ScreenUtil.getInstance().setWidth(70),
+                      height: ScreenUtil.getInstance().setHeight(70),
+                    ),
+                  ),
+                  Positioned(
+                    top: 50.0,
+                    child: _views[_selectedIndex],
+                  ),
+                ],
+              ),
+            ),
+            bottomNavigationBar: BottomNavigationBar(
+                backgroundColor: Color(0xFF2A2E3D),
+                selectedItemColor: Color(0xFFD71786),
+                currentIndex: _selectedIndex,
+                type: BottomNavigationBarType.fixed,
+                onTap: _itemTapped,
+                items: _bottomNavigationData.map((data) {
+                  return BottomNavigationBarItem(
+                      icon: Icon(data.icon, color: Color(0xFFFF691F)),
+                      title: Text(data.title,
+                          style: TextStyle(
+                            color: Color(0xFFFF691F),
+                          )));
+                }).toList())),
       ),
     );
   }
