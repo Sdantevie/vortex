@@ -25,6 +25,7 @@ class _HomeTabSelectorState extends State<HomeTabSelector>{
                       setState((){
                           _currentIndex = index;
                       });
+                      widget.onItemSelected(index);
                   },
                   child: Text(tab, 
                         style: TextStyle(
@@ -39,6 +40,11 @@ class _HomeTabSelectorState extends State<HomeTabSelector>{
 
     @override
     Widget build(BuildContext context){
-        return Row( children: _buildHomeTabs());
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row( 
+            children: _buildHomeTabs()
+            )
+        );
     }
 }
