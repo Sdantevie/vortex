@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vortex/screens/home/home_tab_selector.dart';
 
 class Home extends StatefulWidget {
   Home({Key key}) : super(key: key);
@@ -8,27 +9,23 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
-  TabController _tabController;
-  @override
-  void initState() {
-    _tabController = TabController(length: 3, vsync: this);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        bottom: TabBar(
-          controller: _tabController,
-          isScrollable: true,
-          tabs: <Widget>[
-            Tab(
-              child: Text('Trending'),
-            ),
-          ],
-        ),
+      body: SingleChildScrollView(
+          child: Column(
+              children: <Widget>[
+                HomeTabSelector(
+                tabs: ['Trending Now', 'Latest Release', 'Vortex Mini'], 
+                  onItemSelected: (index){
+
+                  },
+                ),
+                SizedBox(height: 20.0,)
+              ]
+          )
       ),
     );
   }

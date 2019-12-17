@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:vortex/screens/characters/characters.dart';
+//import 'package:vortex/screens/characters/characters.dart';
 import 'package:vortex/screens/explore/explore.dart';
 import 'package:vortex/screens/favourite/favourite.dart';
 import 'package:vortex/screens/home/home.dart';
@@ -20,7 +20,7 @@ class _AppContainerState extends State<AppContainer> {
     Home(),
     Explore(),
     Favourite(),
-    Characters(),
+    //Characters(),
     Settings()
   ];
 
@@ -38,8 +38,8 @@ class _AppContainerState extends State<AppContainer> {
       BottomNavigationData(title: 'Home', icon: Icons.home),
       BottomNavigationData(title: 'Explore', icon: Icons.explore),
       BottomNavigationData(title: 'Favourites', icon: Icons.favorite),
-      BottomNavigationData(title: 'Characters', icon: Icons.people),
-      BottomNavigationData(title: 'Settings', icon: Icons.settings)
+     // BottomNavigationData(title: 'Characters', icon: Icons.people),
+      BottomNavigationData(title: 'More', icon: Icons.more_horiz)
     ];
     return Container(
       decoration: BoxDecoration(
@@ -60,33 +60,32 @@ class _AppContainerState extends State<AppContainer> {
                 children: <Widget>[
                   Positioned(
                     top: 16,
-                    left: 16,
+                    left: 20,
                     child: Image.asset(
                       "assets/images/vortex247.png",
                       width: ScreenUtil.getInstance().setWidth(70),
                       height: ScreenUtil.getInstance().setHeight(70),
                     ),
                   ),
-                  Positioned(
-                    top: 50.0,
+                  Positioned.fill(
                     child: _views[_selectedIndex],
-                  ),
+                    left: 20,
+                    top: 90,
+                  )
                 ],
               ),
             ),
             bottomNavigationBar: BottomNavigationBar(
                 backgroundColor: Color(0xFF2A2E3D),
+                unselectedItemColor: Color(0xFFFF691F),
                 selectedItemColor: Color(0xFFD71786),
                 currentIndex: _selectedIndex,
                 type: BottomNavigationBarType.fixed,
                 onTap: _itemTapped,
                 items: _bottomNavigationData.map((data) {
                   return BottomNavigationBarItem(
-                      icon: Icon(data.icon, color: Color(0xFFFF691F)),
-                      title: Text(data.title,
-                          style: TextStyle(
-                            color: Color(0xFFFF691F),
-                          )));
+                      icon: Icon(data.icon),
+                      title: Text(data.title));
                 }).toList())),
       ),
     );
