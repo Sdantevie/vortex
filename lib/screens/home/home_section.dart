@@ -17,18 +17,25 @@ class _HomeSectionState extends State<HomeSection> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
+    return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(widget.name, 
             style: TextStyle(color: Color(0xFFD71786), fontFamily: 'OpenSans', fontSize: 22.0)
           ),
           Divider(color: Color(0xFFFF691F),),
-          HomeComicCard(comic: _comics[0],),
+          SizedBox(
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: _comics.length - 1,
+              itemBuilder: (context, index){
+                Comic comic = _comics[index];
+                return HomeComicCard(comic: comic,);
+              },
+            ),
+          )
         ],
-      ),
-    );
+      );
   }
 }
 

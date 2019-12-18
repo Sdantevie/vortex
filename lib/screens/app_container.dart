@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-//import 'package:vortex/screens/characters/characters.dart';
 import 'package:vortex/screens/explore/explore.dart';
-import 'package:vortex/screens/favourite/favourite.dart';
 import 'package:vortex/screens/home/home.dart';
 import 'package:vortex/screens/settings/settings.dart';
+
+import 'characters/characters.dart';
 
 class AppContainer extends StatefulWidget {
   AppContainer({Key key}) : super(key: key);
@@ -14,13 +14,13 @@ class AppContainer extends StatefulWidget {
 }
 
 class _AppContainerState extends State<AppContainer> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
 
   List<Widget> _views = [
     Home(),
     Explore(),
-    Favourite(),
-    //Characters(),
+   // Favourite(),
+    Characters(),
     Settings()
   ];
 
@@ -37,8 +37,8 @@ class _AppContainerState extends State<AppContainer> {
     var _bottomNavigationData = [
       BottomNavigationData(title: 'Home', icon: Icons.home),
       BottomNavigationData(title: 'Explore', icon: Icons.explore),
-      BottomNavigationData(title: 'Favourites', icon: Icons.favorite),
-     // BottomNavigationData(title: 'Characters', icon: Icons.people),
+      //BottomNavigationData(title: 'Favourites', icon: Icons.favorite),
+      BottomNavigationData(title: 'Characters', icon: Icons.people),
       BottomNavigationData(title: 'More', icon: Icons.more_horiz)
     ];
     return Container(
