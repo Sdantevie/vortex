@@ -63,7 +63,12 @@ class CharacterCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).pushNamed(
+          '/character',
+          arguments: character,
+        );
+      },
       dense: true,
       leading: Image.network(character.imageUrl),
       title: Text(character.name,
