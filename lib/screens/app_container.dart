@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vortex/screens/explore/explore.dart';
 import 'package:vortex/screens/home/home.dart';
 import 'package:vortex/screens/settings/settings.dart';
-
 import 'characters/characters.dart';
 
 class AppContainer extends StatefulWidget {
@@ -19,7 +18,7 @@ class _AppContainerState extends State<AppContainer> {
   List<Widget> _views = [
     Home(),
     Explore(),
-   // Favourite(),
+    // Favourite(),
     Characters(),
     Settings()
   ];
@@ -84,8 +83,7 @@ class _AppContainerState extends State<AppContainer> {
                 onTap: _itemTapped,
                 items: _bottomNavigationData.map((data) {
                   return BottomNavigationBarItem(
-                      icon: Icon(data.icon),
-                      title: Text(data.title));
+                      icon: Icon(data.icon), title: Text(data.title));
                 }).toList())),
       ),
     );

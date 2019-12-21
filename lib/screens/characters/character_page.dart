@@ -8,6 +8,12 @@ class CharacterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView();
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverAppBar(
+          
+        )
+      ],
+    );
   }
 }
