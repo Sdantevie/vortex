@@ -45,9 +45,18 @@ class CharacterPage extends StatelessWidget {
                 Positioned(
                   top: 130,
                   left: 20,
-                  child: Image.network(
-                    character.imageUrl,
-                    width: 400.0,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Expanded(
+                        child: Container(
+                          child: Image.network(
+                            character.imageUrl,
+                            width: 200.0,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 )
               ],
