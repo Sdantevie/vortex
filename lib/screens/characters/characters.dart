@@ -24,6 +24,7 @@ class _CharactersState extends State<Characters> {
         summary:
             '''One of the main antagonists is a deity whom just wants to fool around with lives of people especially the ones that owe him. He is a huge intimidating figure in tattered bloodstained wrapper and headband, his skin is supposed to feel like stone. He has two big machetes that double as a stool.'''),
     Character(
+        weapons: ['Guns', 'Arrows'],
         imageUrl:
             'https://vortex247.com/wp-content/uploads/2017/08/Anikulapo.png',
         name: 'Anikulapo',

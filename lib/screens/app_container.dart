@@ -69,7 +69,8 @@ class _AppContainerState extends State<AppContainer> {
                   Positioned.fill(
                     child: _views[_selectedIndex],
                     left: 20,
-                    top: 90,
+                    right: 20,
+                    top: 80,
                   )
                 ],
               ),
