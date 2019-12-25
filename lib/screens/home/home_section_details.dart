@@ -28,7 +28,9 @@ class HomeSectionDetails extends StatelessWidget {
     return CustomScrollView(
       slivers: <Widget>[
         SliverAppBar(
-          backgroundColor: Colors.transparent,
+          elevation: 4.0,
+          pinned: true,
+          backgroundColor: Color(0xFF2A2E3D),
           leading: InkWell(
             onTap: () {
               Navigator.of(context).pop();
@@ -38,9 +40,8 @@ class HomeSectionDetails extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          expandedHeight: 80.0,
+          expandedHeight: 70.0,
           flexibleSpace: FlexibleSpaceBar(
-            centerTitle: true,
             title: Text(this.args.title,
                 style: TextStyle(
                     color: Color(0xFFD71786), fontFamily: 'OpenSans')),
@@ -50,8 +51,9 @@ class HomeSectionDetails extends StatelessWidget {
             sliver: SliverGrid(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
-                mainAxisSpacing: 4.0,
-                crossAxisSpacing: 4.0,
+                childAspectRatio: 0.65,
+                mainAxisSpacing: 8.0,
+                crossAxisSpacing: 10.0,
               ),
               delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) =>
@@ -65,14 +67,15 @@ class HomeSectionDetails extends StatelessWidget {
 
   _buildGridItem(BuildContext context, int index) {
     return Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.black54,
-                  offset: Offset(0.0, 4.0),
-                  blurRadius: 6.0)
-            ]),
+        color: Colors.white,
+        // decoration: BoxDecoration(
+        //     borderRadius: BorderRadius.circular(10.0),
+        //     boxShadow: [
+        //       BoxShadow(
+        //           color: Colors.black54,
+        //           offset: Offset(0.0, 4.0),
+        //           blurRadius: 1.0)
+        //     ]),
         child: GestureDetector(
           onTap: () {
             Navigator.of(context).pushNamed('/comic_preview',
@@ -80,7 +83,7 @@ class HomeSectionDetails extends StatelessWidget {
           },
           child: Image.network(
             this.args.comics[index].imageUrl,
-            fit: BoxFit.contain,
+            fit: BoxFit.cover,
           ),
         ));
   }

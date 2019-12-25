@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vortex/models/comic.dart';
+import 'package:vortex/models/comic_category.dart';
 
 import 'home_section.dart';
 
@@ -38,15 +39,53 @@ class _HomeState extends State<Home> {
             'Anikulapo III is from a ancestral family of summoners, gifted with power to summon deities and celestial beast through music',
         imageUrl:
             'https://vortex247.com/wp-content/uploads/2019/10/Anikulapo.jpg'),
+    Comic(
+        title: 'Nollywood Comics – Love In Lagos #1',
+        summary:
+            'Welcome to Sidi’s world, a beautiful working class lady at the prime of life, till she meets Jake. THE LAGOS…',
+        imageUrl:
+            'https://vortex247.com/wp-content/uploads/2017/08/NOLLYWOOD-COMICS.jpg'),
+    Comic(
+        title: 'SPIRIT WARS #1 – Requiem',
+        summary:
+            'When Ajagbeja, General of Sango, heralds the Eternals to war against the angels on the celestial plain the events in….',
+        imageUrl:
+            'https://vortex247.com/wp-content/uploads/2017/08/SPIRIT-WARS-1-Requiem-e1549555863194.jpg'),
+    Comic(
+        title: 'Ojuju #1 – Marabadua',
+        summary:
+            'Ojuju is on the run with Aralia “The One he is sworn to protect” little do they know what hunts…',
+        imageUrl:
+            'https://vortex247.com/wp-content/uploads/2019/03/Ojuju-1-Cover.jpg')
   ];
 
   //List<String> _list = ['Trending Now', 'Latest Release', 'Vortex Mini'];
-  List<Comic> _comics = [
-    Comic(
+  List<ComicCategory> _comicCategories = [
+    ComicCategory(
+        comics: [],
         title: 'JUNE XII',
         imageUrl:
             'https://vortex247.com/wp-content/uploads/2019/02/slide-junexii.jpg'),
-    Comic(
+    ComicCategory(
+        comics: [
+          Comic(
+              title: 'Secret Society #1: Re-Legion III',
+              summary:
+                  'The end times are drawing near. The gates of limbo quiver as the morning star brings imminent darkness closer. We…',
+              imageUrl:
+                  'https://vortex247.com/wp-content/uploads/2017/08/Secret-Society-1-Re-Legion-III-e1549557023939.jpg'),
+          Comic(
+              title: 'Secret Society #0 – Original Sin',
+              summary:
+                  'Discover the dark side of the Spirit, Re-Legion a 33 year old catholic priest has begun to have a series…',
+              imageUrl:
+                  'https://vortex247.com/wp-content/uploads/2019/03/Secret-Society-0-Cover-1080x675.jpg')
+        ],
+        imageUrl:
+            'https://vortex247.com/wp-content/uploads/2019/02/slide-secretsociety.jpg',
+        title: 'Secret Society'),
+    ComicCategory(
+        comics: [],
         title: 'BADGAIS',
         imageUrl:
             'https://vortex247.com/wp-content/uploads/2019/02/slide-badgais.jpg'),
@@ -54,15 +93,15 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: ListView(
-        padding: EdgeInsets.only(top: 0.0, bottom: 8.0),
+      child: Column(
+        //padding: EdgeInsets.only(top: 0.0, bottom: 8.0),
         children: <Widget>[
           Container(
             height: 200,
             width: double.infinity,
             child: PageView.builder(
               controller: _pageController,
-              itemCount: _comics.length,
+              itemCount: _comicCategories.length,
               itemBuilder: (BuildContext context, int index) {
                 return _comicShowcase(index);
               },
@@ -118,11 +157,11 @@ class _HomeState extends State<Home> {
                   ]),
               child: Center(
                 child: Hero(
-                  tag: _comics[index].title,
+                  tag: _comicCategories[index].title,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
                     child: Image.network(
-                      _comics[index].imageUrl,
+                      _comicCategories[index].imageUrl,
                       height: 160.0,
                       fit: BoxFit.cover,
                     ),
@@ -136,7 +175,7 @@ class _HomeState extends State<Home> {
               bottom: 40,
               child: Container(
                 child: Text(
-                  _comics[index].title,
+                  _comicCategories[index].title,
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 18.0,
