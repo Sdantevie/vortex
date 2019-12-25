@@ -13,7 +13,7 @@ class AppContainer extends StatefulWidget {
 }
 
 class _AppContainerState extends State<AppContainer> {
-  int _selectedIndex = 2;
+  int _selectedIndex = 0;
 
   List<Widget> _views = [
     Home(),
@@ -43,7 +43,7 @@ class _AppContainerState extends State<AppContainer> {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-            colors: [Color(0xFF040313), Color(0xFF2A2E3D)],
+            colors: [Color(0xFF2A2E3D), Color(0xFF040313)],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             tileMode: TileMode.clamp,
@@ -59,24 +59,37 @@ class _AppContainerState extends State<AppContainer> {
                 children: <Widget>[
                   Positioned(
                     top: 16,
-                    left: 20,
-                    child: Image.asset(
-                      "assets/images/vortex247.png",
-                      width: ScreenUtil.getInstance().setWidth(70),
-                      height: ScreenUtil.getInstance().setHeight(70),
+                    left: 16,
+                    right: 16,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Image.asset(
+                          "assets/images/vortex247.png",
+                          width: ScreenUtil.getInstance().setWidth(70),
+                          height: ScreenUtil.getInstance().setHeight(70),
+                        ),
+                        Hero(
+                          tag: 'Search',
+                          child: Icon(
+                            Icons.search,
+                            color: Color(0xFFFF691F),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                   Positioned.fill(
                     child: _views[_selectedIndex],
-                    left: 20,
-                    right: 20,
-                    top: 80,
+                    left: 16,
+                    right: 16,
+                    top: _selectedIndex == 0 ? 50 : 80,
                   )
                 ],
               ),
             ),
             bottomNavigationBar: BottomNavigationBar(
-                backgroundColor: Color(0xFF2A2E3D),
+                backgroundColor: Color(0xFF040313),
                 unselectedItemColor: Color(0xFFFF691F),
                 selectedItemColor: Color(0xFFD71786),
                 currentIndex: _selectedIndex,

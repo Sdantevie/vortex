@@ -1,53 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:vortex/screens/home/home_section_details.dart';
 
 import '../../models/comic.dart';
-class HomeSection extends StatefulWidget {
-  final String name;
-  HomeSection({@required this.name});
 
-  @override
-  _HomeSectionState createState() => _HomeSectionState();
-}
+class HomeSection extends StatelessWidget {
+  final String title;
+  final List<Comic> comics;
 
-class _HomeSectionState extends State<HomeSection> {
-  List<Comic> _comics = [
-    Comic(title: 'FolkTales', imageUrl: 'https://vortex247.com/wp-content/uploads/2019/11/FLK-COVER.jpg'),
-    Comic(title: 'Anikulapo #1: Orishirishi', imageUrl: 'https://vortex247.com/wp-content/uploads/2019/10/Anikulapo.jpg')];
-
+  HomeSection({@required this.title, @required this.comics});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(widget.name, 
-            style: TextStyle(color: Color(0xFFD71786), fontFamily: 'OpenSans', fontSize: 22.0)
-          ),
-          Divider(color: Color(0xFFFF691F),),
-          SizedBox(
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: _comics.length - 1,
-              itemBuilder: (context, index){
-                Comic comic = _comics[index];
-                return HomeComicCard(comic: comic,);
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text(this.title,
+                style: TextStyle(
+                    color: Color(0xFFD71786),
+                    fontFamily: 'OpenSans',
+                    fontSize: 22.0)),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed('/home_section',
+                    arguments: HomeSectionDetailsArgs(
+                        title: this.title, comics: this.comics));
               },
-            ),
-          )
-        ],
-      );
-  }
-}
-
-class HomeComicCard extends StatelessWidget {
-  final Comic comic;
-
-  HomeComicCard({@required this.comic});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text(this.comic.title, style: TextStyle(color: Colors.white),),
+              child: Icon(
+                Icons.arrow_forward,
+                color: Color(0xFFFF691F),
+              ),
+            )
+          ],
+        ),
+        Divider(
+          color: Color(0xFFFF691F),
+        ),
+        Container(
+          height: 150,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: this.comics.length,
+            itemBuilder: (context, index) {
+              Comic comic = this.comics[index];
+              return Container(
+                  margin: EdgeInsets.only(
+                    left: 2.0,
+                    right: 8.0,
+                    top: 10.0,
+                  ),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black54,
+                            offset: Offset(0.0, 4.0),
+                            blurRadius: 6.0)
+                      ]),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context)
+                          .pushNamed('/comic_preview', arguments: comic);
+                    },
+                    child: Image.network(
+                      comic.imageUrl,
+                      fit: BoxFit.cover,
+                    ),
+                  ));
+            },
+          ),
+        )
+      ],
     );
   }
 }

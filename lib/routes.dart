@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:vortex/models/comic.dart';
 import 'package:vortex/screens/app_container.dart';
+import 'package:vortex/screens/home/comic_preview.dart';
+import 'package:vortex/screens/home/home_section_details.dart';
 import 'models/character.dart';
 import 'screens/characters/character_page.dart';
 
@@ -11,8 +14,27 @@ class RouteGenerator {
       case '/':
         return MaterialPageRoute(builder: (_) => AppContainer());
       case '/character':
-        if(args is Character){
-          return MaterialPageRoute(builder: (_) => CharacterPage(character: args,));
+        if (args is Character) {
+          return MaterialPageRoute(
+              builder: (_) => CharacterPage(
+                    character: args,
+                  ));
+        }
+        return _errorRoute();
+      case '/comic_preview':
+        if (args is Comic) {
+          return MaterialPageRoute(
+              builder: (_) => ComicPreview(
+                    comic: args,
+                  ));
+        }
+        return _errorRoute();
+      case '/home_section':
+        if (args is HomeSectionDetailsArgs) {
+          return MaterialPageRoute(
+              builder: (_) => HomeSectionDetails(
+                    args: args,
+                  ));
         }
         return _errorRoute();
       default:
