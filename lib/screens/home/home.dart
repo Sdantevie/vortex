@@ -27,6 +27,12 @@ class _HomeState extends State<Home> {
         imageUrl:
             'https://vortex247.com/wp-content/uploads/2019/11/FLK-COVER.jpg'),
     Comic(
+        title: 'Wraith House',
+        summary:
+            'The Chimera is aware of the Wrath House plot against them using Antoli Umar as a tool to expose and..',
+        imageUrl:
+            'https://vortex247.com/wp-content/uploads/2019/03/Wrath-House-2-Cover-e1552046913663.jpg'),
+    Comic(
         title: 'Anikulapo #1: Orishirishi',
         summary:
             'Anikulapo III is from a ancestral family of summoners, gifted with power to summon deities and celestial beast through music',

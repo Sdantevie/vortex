@@ -28,6 +28,7 @@ class HomeSectionDetails extends StatelessWidget {
     return CustomScrollView(
       slivers: <Widget>[
         SliverAppBar(
+          backgroundColor: Colors.transparent,
           leading: InkWell(
             onTap: () {
               Navigator.of(context).pop();
@@ -39,27 +40,31 @@ class HomeSectionDetails extends StatelessWidget {
           ),
           expandedHeight: 80.0,
           flexibleSpace: FlexibleSpaceBar(
-            title: Text(this.args.title),
+            centerTitle: true,
+            title: Text(this.args.title,
+                style: TextStyle(
+                    color: Color(0xFFD71786), fontFamily: 'OpenSans')),
           ),
         ),
-        SliverGrid(
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-          delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) =>
-                  _buildGridItem(context, index)),
-        )
+        SliverPadding(
+            sliver: SliverGrid(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 4.0,
+                crossAxisSpacing: 4.0,
+              ),
+              delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) =>
+                      _buildGridItem(context, index),
+                  childCount: this.args.comics.length),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 10.0))
       ],
     );
   }
 
   _buildGridItem(BuildContext context, int index) {
     return Container(
-        margin: EdgeInsets.only(
-          left: 2.0,
-          right: 8.0,
-          top: 10.0,
-        ),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
             boxShadow: [
@@ -75,7 +80,7 @@ class HomeSectionDetails extends StatelessWidget {
           },
           child: Image.network(
             this.args.comics[index].imageUrl,
-            fit: BoxFit.cover,
+            fit: BoxFit.contain,
           ),
         ));
   }
