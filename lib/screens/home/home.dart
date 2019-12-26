@@ -79,8 +79,58 @@ class _HomeState extends State<Home> {
               summary:
                   'Discover the dark side of the Spirit, Re-Legion a 33 year old catholic priest has begun to have a series…',
               imageUrl:
-                  'https://vortex247.com/wp-content/uploads/2019/03/Secret-Society-0-Cover-1080x675.jpg')
+                  'https://vortex247.com/wp-content/uploads/2019/03/Secret-Society-0-Cover-1080x675.jpg'),
+          Comic(
+              title: 'Anikulapo #1: Orishirishi',
+              summary:
+                  'Anikulapo III is from a ancestral family of summoners, gifted with power to summon deities and celestial beast through music',
+              imageUrl:
+                  'https://vortex247.com/wp-content/uploads/2019/10/Anikulapo.jpg'),
+          Comic(
+              title: 'Nollywood Comics – Love In Lagos #1',
+              summary:
+                  'Welcome to Sidi’s world, a beautiful working class lady at the prime of life, till she meets Jake. THE LAGOS…',
+              imageUrl:
+                  'https://vortex247.com/wp-content/uploads/2017/08/NOLLYWOOD-COMICS.jpg'),
+          Comic(
+              title: 'SPIRIT WARS #1 – Requiem',
+              summary:
+                  'When Ajagbeja, General of Sango, heralds the Eternals to war against the angels on the celestial plain the events in….',
+              imageUrl:
+                  'https://vortex247.com/wp-content/uploads/2017/08/SPIRIT-WARS-1-Requiem-e1549555863194.jpg'),
+          Comic(
+              title: 'Ojuju #1 – Marabadua',
+              summary:
+                  'Ojuju is on the run with Aralia “The One he is sworn to protect” little do they know what hunts…',
+              imageUrl:
+                  'https://vortex247.com/wp-content/uploads/2019/03/Ojuju-1-Cover.jpg'),
+          Comic(
+              title: 'Anikulapo #1: Orishirishi',
+              summary:
+                  'Anikulapo III is from a ancestral family of summoners, gifted with power to summon deities and celestial beast through music',
+              imageUrl:
+                  'https://vortex247.com/wp-content/uploads/2019/10/Anikulapo.jpg'),
+          Comic(
+              title: 'Nollywood Comics – Love In Lagos #1',
+              summary:
+                  'Welcome to Sidi’s world, a beautiful working class lady at the prime of life, till she meets Jake. THE LAGOS…',
+              imageUrl:
+                  'https://vortex247.com/wp-content/uploads/2017/08/NOLLYWOOD-COMICS.jpg'),
+          Comic(
+              title: 'SPIRIT WARS #1 – Requiem',
+              summary:
+                  'When Ajagbeja, General of Sango, heralds the Eternals to war against the angels on the celestial plain the events in….',
+              imageUrl:
+                  'https://vortex247.com/wp-content/uploads/2017/08/SPIRIT-WARS-1-Requiem-e1549555863194.jpg'),
+          Comic(
+              title: 'Ojuju #1 – Marabadua',
+              summary:
+                  'Ojuju is on the run with Aralia “The One he is sworn to protect” little do they know what hunts…',
+              imageUrl:
+                  'https://vortex247.com/wp-content/uploads/2019/03/Ojuju-1-Cover.jpg')
         ],
+        summary:
+            'Discover the dark side of the spirit in a gripping cross universe series which delves deep into the stories of the Masquerades, Wildings and Celestials. Every 100 years the world is gifted with a RE-LEGION a supernatural being with the ability to command the faith of all men, but with that gift brings impending doom of the apocalypse; it opens the door for Lucifer itself.',
         imageUrl:
             'https://vortex247.com/wp-content/uploads/2019/02/slide-secretsociety.jpg',
         title: 'Secret Society'),
@@ -103,7 +153,7 @@ class _HomeState extends State<Home> {
               controller: _pageController,
               itemCount: _comicCategories.length,
               itemBuilder: (BuildContext context, int index) {
-                return _comicShowcase(index);
+                return _comicShowcase(context, index);
               },
             ),
           ),
@@ -124,7 +174,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  _comicShowcase(int index) {
+  _comicShowcase(BuildContext context, int index) {
     return AnimatedBuilder(
       animation: _pageController,
       builder: (BuildContext context, Widget widget) {
@@ -135,12 +185,17 @@ class _HomeState extends State<Home> {
         }
 
         return Center(
+            child: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pushNamed('/comic_category_preview',
+                arguments: _comicCategories[index]);
+          },
           child: SizedBox(
             height: Curves.easeInOut.transform(value) * 200.0,
             width: Curves.easeInOut.transform(value) * 450.0,
             child: widget,
           ),
-        );
+        ));
       },
       child: Stack(
         children: <Widget>[

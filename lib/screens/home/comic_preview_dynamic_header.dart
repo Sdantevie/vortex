@@ -37,7 +37,7 @@ class ComicPreviewDynamicHeader extends SliverPersistentHeaderDelegate {
             this.title,
             style: TextStyle(
               fontSize: 32.0,
-              color: Colors.white.withOpacity(titleOpacity(shrinkOffset)),
+              color: Color(0xFFD71786).withOpacity(titleOpacity(shrinkOffset)),
             ),
           ),
         ),

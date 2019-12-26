@@ -70,9 +70,6 @@ class ComicPreview extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              height: 0.0,
-            ),
             Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Divider(

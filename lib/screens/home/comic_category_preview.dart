@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:vortex/models/comic.dart';
+import 'package:vortex/models/comic_category.dart';
 
-class HomeSectionDetails extends StatelessWidget {
-  final HomeSectionDetailsArgs args;
-  const HomeSectionDetails({Key key, @required this.args}) : super(key: key);
+import 'comic_preview_dynamic_header.dart';
 
-  @override
+class ComicCategoryPreview extends StatelessWidget {
+  final ComicCategory category;
+  ComicCategoryPreview({Key key, @required this.category}) : super(key: key);
+
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -26,40 +27,53 @@ class HomeSectionDetails extends StatelessWidget {
   _buildScrollable(BuildContext context) {
     return CustomScrollView(
       slivers: <Widget>[
-        SliverAppBar(
-          elevation: 4.0,
+        SliverPersistentHeader(
           pinned: true,
-          backgroundColor: Color(0xFF2A2E3D),
-          leading: InkWell(
-            onTap: () {
-              Navigator.of(context).pop();
-            },
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            ),
-          ),
-          expandedHeight: 70.0,
-          flexibleSpace: FlexibleSpaceBar(
-            title: Text(this.args.title,
-                style: TextStyle(
-                    color: Color(0xFFD71786), fontFamily: 'OpenSans')),
-          ),
+          delegate: ComicPreviewDynamicHeader(
+              title: this.category.title,
+              backgroundImageUrl: this.category.imageUrl),
         ),
+        SliverList(
+            delegate: SliverChildListDelegate([
+          this.category.summary.isNotEmpty
+              ? Container(
+                  padding: EdgeInsets.only(
+                      left: 16.0, right: 16.0, top: 18.0, bottom: 8.0),
+                  child: Text(
+                    this.category.summary,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'OpenSans',
+                    ),
+                  ),
+                )
+              : Container(),
+          Padding(
+            child: Text(
+              'Issues',
+              style: TextStyle(
+                  color: Color(0xFFD71786),
+                  fontFamily: 'OpenSans',
+                  fontSize: 21.0),
+            ),
+            padding:
+                EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 2.0),
+          )
+        ])),
         SliverPadding(
             sliver: SliverGrid(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 childAspectRatio: 0.65,
                 mainAxisSpacing: 8.0,
-                crossAxisSpacing: 10.0,
+                crossAxisSpacing: 14.0,
               ),
               delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) =>
                       _buildGridItem(context, index),
-                  childCount: this.args.comics.length),
+                  childCount: this.category.comics.length),
             ),
-            padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 10.0))
+            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0))
       ],
     );
   }
@@ -78,19 +92,12 @@ class HomeSectionDetails extends StatelessWidget {
         child: GestureDetector(
           onTap: () {
             Navigator.of(context).pushNamed('/comic_preview',
-                arguments: this.args.comics[index]);
+                arguments: this.category.comics[index]);
           },
           child: Image.network(
-            this.args.comics[index].imageUrl,
+            this.category.comics[index].imageUrl,
             fit: BoxFit.cover,
           ),
         ));
   }
-}
-
-class HomeSectionDetailsArgs {
-  final String title;
-  final List<Comic> comics;
-
-  HomeSectionDetailsArgs({@required this.title, @required this.comics});
 }

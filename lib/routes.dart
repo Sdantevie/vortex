@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:vortex/models/comic.dart';
+import 'package:vortex/models/comic_category.dart';
 import 'package:vortex/screens/app_container.dart';
+import 'package:vortex/screens/home/comic_category_preview.dart';
 import 'package:vortex/screens/home/comic_preview.dart';
 import 'package:vortex/screens/home/home_section_details.dart';
+import 'package:vortex/search.dart';
 import 'models/character.dart';
+
 import 'screens/characters/character_page.dart';
 
 class RouteGenerator {
@@ -37,6 +41,14 @@ class RouteGenerator {
                   ));
         }
         return _errorRoute();
+      case '/comic_category_preview':
+        if (args is ComicCategory) {
+          return MaterialPageRoute(
+              builder: (_) => ComicCategoryPreview(category: args));
+        }
+        return _errorRoute();
+      case '/search':
+        return MaterialPageRoute(builder: (_) => Search());
       default:
         return _errorRoute();
     }
