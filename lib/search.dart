@@ -77,7 +77,7 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
         ),
         SliverPersistentHeader(
             pinned: true,
-            delegate: _SliverAppBarDelegate(
+            delegate: SliverAppBarDelegate(
               minHeight: 64.0,
               maxHeight: 64.0,
               child: Center(
@@ -165,8 +165,8 @@ class ComicSearchDelegate extends SearchDelegate<Comic> {
   }
 }
 
-class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _SliverAppBarDelegate({
+class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  SliverAppBarDelegate({
     @required this.minHeight,
     @required this.maxHeight,
     @required this.child,
@@ -185,7 +185,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+  bool shouldRebuild(SliverAppBarDelegate oldDelegate) {
     return maxHeight != oldDelegate.maxHeight ||
         minHeight != oldDelegate.minHeight ||
         child != oldDelegate.child;

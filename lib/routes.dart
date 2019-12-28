@@ -4,6 +4,7 @@ import 'package:vortex/models/comic_category.dart';
 import 'package:vortex/screens/app_container.dart';
 import 'package:vortex/screens/home/comic_category_preview.dart';
 import 'package:vortex/screens/home/comic_preview.dart';
+import 'package:vortex/screens/home/comic_reader.dart';
 import 'package:vortex/screens/home/home_section_details.dart';
 import 'package:vortex/search.dart';
 import 'models/character.dart';
@@ -49,6 +50,11 @@ class RouteGenerator {
         return _errorRoute();
       case '/search':
         return MaterialPageRoute(builder: (_) => Search());
+      case '/comic_reader':
+        if (args is String) {
+          return MaterialPageRoute(builder: (_) => ComicReader(path: args));
+        }
+        return _errorRoute();
       default:
         return _errorRoute();
     }

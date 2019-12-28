@@ -25,6 +25,9 @@ dependencies:
   cupertino_icons: ^0.1.2
   flutter_screenutil: ^0.7.0
   gradient_text: ^1.0.2
+  flutter_pdfview: ^1.0.0+10
+  path_provider: ^1.5.1
+  http: ^0.12.0+3
 
 dev_dependencies:
   flutter_test:
@@ -45,6 +48,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
    - assets/images/vortex247.png
+   - assets/images/Mortar.png
+   - assets/images/Kenga.png
+   - assets/images/Anikulapo.png
+   - assets/sample.pdf
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

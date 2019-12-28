@@ -142,35 +142,42 @@ class _HomeState extends State<Home> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        //padding: EdgeInsets.only(top: 0.0, bottom: 8.0),
-        children: <Widget>[
-          Container(
-            height: 200,
-            width: double.infinity,
-            child: PageView.builder(
-              controller: _pageController,
-              itemCount: _comicCategories.length,
-              itemBuilder: (BuildContext context, int index) {
-                return _comicShowcase(context, index);
-              },
-            ),
+    return SliverList(
+      delegate: SliverChildListDelegate([
+        Container(
+          height: 200,
+          width: double.infinity,
+          child: PageView.builder(
+            controller: _pageController,
+            itemCount: _comicCategories.length,
+            itemBuilder: (BuildContext context, int index) {
+              return _comicShowcase(context, index);
+            },
           ),
-          SizedBox(
-            height: 20.0,
-          ),
-          HomeSection(title: 'Trending Now', comics: _comicsCover),
-          SizedBox(
-            height: 20.0,
-          ),
-          HomeSection(title: 'Latest Release', comics: _comicsCover),
-          SizedBox(
-            height: 20.0,
-          ),
-          HomeSection(title: 'Vortex Mini', comics: _comicsCover)
-        ],
-      ),
+        ),
+        SizedBox(
+          height: 20.0,
+        ),
+        Padding(
+          child: HomeSection(title: 'Trending Now', comics: _comicsCover),
+          padding: EdgeInsets.only(left: 16.0, right: 16.0),
+        ),
+        SizedBox(
+          height: 20.0,
+        ),
+        Padding(
+          child: HomeSection(title: 'Latest Release', comics: _comicsCover),
+          padding: EdgeInsets.only(left: 16.0, right: 16.0),
+        ),
+        SizedBox(
+          height: 20.0,
+        ),
+        Padding(
+          child: HomeSection(title: 'Vortex Mini', comics: _comicsCover),
+          padding: EdgeInsets.only(left: 16.0, right: 16.0),
+        ),
+      ]),
+      //padding: EdgeInsets.only(top: 0.0, bottom: 8.0),
     );
   }
 

@@ -39,108 +39,122 @@ class CharacterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            colors: [Color(0xFF040313), Color(0xFF2A2E3D)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            tileMode: TileMode.clamp,
-            stops: [0.0, 1.0]),
-      ),
-      child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Padding(
-            padding: EdgeInsets.only(top: 45.0, left: 20.0, right: 20.0),
-            child: SingleChildScrollView(
-                child: Stack(
-              children: <Widget>[
-                Positioned(
-                    top: 16,
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Icon(Icons.clear, color: Colors.white),
-                    )),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 80,
-                    ),
-                    Text(character.name,
-                        style: TextStyle(
-                            color: Color(0xFFD71786),
-                            fontSize: 22.0,
-                            fontFamily: 'OpenSans')),
-                    SizedBox(
-                      height: 25.0,
-                    ),
-                    Container(
-                      child: Image.network(
-                        character.imageUrl,
-                        width: 240.0,
-                        height: 240.0,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: [Color(0xFF2A2E3D), Color(0xFF040313)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              tileMode: TileMode.clamp,
+              stops: [0.0, 1.0]),
+        ),
+        child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: _buildScrollable(context)));
+  }
+
+  _buildScrollable(BuildContext context) {
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverAppBar(
+          elevation: 4.0,
+          pinned: true,
+          backgroundColor: Color(0xFF2A2E3D),
+          leading: InkWell(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+          ),
+          expandedHeight: 80.0,
+          flexibleSpace: FlexibleSpaceBar(
+            title: Text(character.name,
+                style: TextStyle(
+                    color: Color(0xFFD71786), fontFamily: 'OpenSans')),
+          ),
+        ),
+        SliverPadding(
+          padding: EdgeInsets.only(left: 16.0, right: 16.0),
+          sliver: SliverList(
+            delegate: SliverChildListDelegate([
+              Stack(
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 25.0,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Text(
-                      character.summary,
-                      style: TextStyle(
-                          color: Colors.white, fontFamily: 'OpenSans'),
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Text.rich(TextSpan(
-                        style: TextStyle(
-                            fontFamily: 'OpenSans', color: Colors.white),
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: 'Abilities:',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFFFF691F))),
-                          ..._buildAbilities()
-                        ])),
-                    SizedBox(
-                      height: 5.0,
-                    ),
-                    Text.rich(TextSpan(
-                        style: TextStyle(
-                            fontFamily: 'OpenSans', color: Colors.white),
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: 'Weapons:',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFFFF691F))),
-                          ..._buildWeapons()
-                        ])),
-                    SizedBox(
-                      height: 15.0,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        OutlineButton(
-                          borderSide: BorderSide(color: Color(0xFFFF691F)),
-                          splashColor: Color(0xFFFF691F),
-                          color: Colors.transparent,
-                          child: Text(
-                            'Find in Library',
-                            style: TextStyle(color: Color(0xFFFF691F)),
-                          ),
-                          onPressed: () {},
+                      Container(
+                        child: Image.network(
+                          character.imageUrl,
+                          width: 240.0,
+                          height: 240.0,
                         ),
-                      ],
-                    )
-                  ],
-                ),
-              ],
-            )),
-          )),
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Text(
+                        character.summary,
+                        style: TextStyle(
+                            color: Colors.white, fontFamily: 'OpenSans'),
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Text.rich(TextSpan(
+                          style: TextStyle(
+                              fontFamily: 'OpenSans', color: Colors.white),
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: 'Abilities:',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFFFF691F))),
+                            ..._buildAbilities()
+                          ])),
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      Text.rich(TextSpan(
+                          style: TextStyle(
+                              fontFamily: 'OpenSans', color: Colors.white),
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: 'Weapons:',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFFFF691F))),
+                            ..._buildWeapons()
+                          ])),
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          OutlineButton(
+                            borderSide: BorderSide(color: Color(0xFFFF691F)),
+                            splashColor: Color(0xFFFF691F),
+                            color: Colors.transparent,
+                            child: Text(
+                              'Find in Library',
+                              style: TextStyle(color: Color(0xFFFF691F)),
+                            ),
+                            onPressed: () {},
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ],
+              )
+            ]),
+          ),
+        )
+      ],
     );
   }
 }

@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vortex/screens/explore/explore.dart';
 import 'package:vortex/screens/home/home.dart';
 import 'package:vortex/screens/settings/settings.dart';
-import 'characters/characters.dart';
+import 'characters/character_tab_header.dart';
+import 'characters/character_content.dart';
+import 'favourite/favourite.dart';
 
 class AppContainer extends StatefulWidget {
   AppContainer({Key key}) : super(key: key);
@@ -12,30 +14,38 @@ class AppContainer extends StatefulWidget {
   _AppContainerState createState() => _AppContainerState();
 }
 
-class _AppContainerState extends State<AppContainer> {
+class _AppContainerState extends State<AppContainer>
+    with SingleTickerProviderStateMixin {
+  @override
+  void initState() {
+    super.initState();
+    _charactertabController = TabController(length: 3, vsync: this);
+    characterHeader = CharacterHeader(
+      tabController: _charactertabController,
+    );
+    characterContent = CharactersContent(
+      tabController: _charactertabController,
+    );
+  }
+
+  TabController _charactertabController;
+  CharacterHeader characterHeader;
+  CharactersContent characterContent;
+
   int _selectedIndex = 0;
 
-  List<Widget> _views = [
-    Home(),
-    Explore(),
-    // Favourite(),
-    Characters(),
-    Settings()
-  ];
-
   _itemTapped(int index) {
-    print(index);
     setState(() {
       _selectedIndex = index;
     });
   }
 
   List<BottomNavigationData> _bottomNavigationData = [
-    BottomNavigationData(title: 'Home', icon: Icons.home),
-    BottomNavigationData(title: 'Explore', icon: Icons.explore),
-    //BottomNavigationData(title: 'Favourites', icon: Icons.favorite),
-    BottomNavigationData(title: 'Characters', icon: Icons.people),
-    BottomNavigationData(title: 'More', icon: Icons.more_horiz)
+    BottomNavigationData(title: 'Home', icon: Icon(Icons.home)),
+    //BottomNavigationData(title: 'Explore', icon: Icon(Icons.explore)),
+    BottomNavigationData(title: 'Favourites', icon: Icon(Icons.favorite)),
+    BottomNavigationData(title: 'Characters', icon: CharactersIcon()),
+    BottomNavigationData(title: 'More', icon: Icon(Icons.more_horiz))
   ];
 
   @override
@@ -62,12 +72,19 @@ class _AppContainerState extends State<AppContainer> {
               onTap: _itemTapped,
               items: _bottomNavigationData.map((data) {
                 return BottomNavigationBarItem(
-                    icon: Icon(data.icon), title: Text(data.title));
+                    icon: data.icon, title: Text(data.title));
               }).toList())),
     );
   }
 
   _buildScrollable() {
+    List<dynamic> _views = [
+      Home(),
+      //Explore(),
+      Favourite(),
+      characterHeader,
+      Settings()
+    ];
     return CustomScrollView(
       slivers: <Widget>[
         SliverAppBar(
@@ -76,7 +93,7 @@ class _AppContainerState extends State<AppContainer> {
           backgroundColor: Color(0xFF2A2E3D),
           actions: <Widget>[
             Padding(
-                padding: EdgeInsets.only(right: 16.0),
+                padding: EdgeInsets.only(right: 8.0),
                 child: IconButton(
                   onPressed: () {
                     Navigator.of(context).pushNamed('/search');
@@ -101,21 +118,50 @@ class _AppContainerState extends State<AppContainer> {
                     color: Color(0xFFD71786), fontFamily: 'OpenSans')),
           ),
         ),
-        SliverPadding(
-            padding: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 20.0),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate([
-                _views[_selectedIndex],
-              ]),
-            ))
+        _views[_selectedIndex],
+        _selectedIndex == 2
+            ? characterContent
+            : SliverPadding(
+                padding: EdgeInsets.all(0.0),
+              )
       ],
     );
   }
 }
 
 class BottomNavigationData {
-  final IconData icon;
+  final Widget icon;
   final String title;
 
   BottomNavigationData({this.icon, this.title});
+}
+
+class CharactersIcon extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 25,
+      child: Stack(fit: StackFit.expand, children: <Widget>[
+        Positioned.fill(
+            left: -30.0,
+            child: CircleAvatar(
+              backgroundColor: Colors.transparent,
+              child: Image.asset('assets/images/Kenga.png',
+                  height: 32.0, width: 40.0),
+            )),
+        Positioned.fill(
+            right: -30.0,
+            child: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                child: Image.asset('assets/images/Anikulapo.png',
+                    height: 35.0, width: 40.0))),
+        Center(
+          child: CircleAvatar(
+              backgroundColor: Colors.transparent,
+              child: Image.asset('assets/images/Mortar.png',
+                  height: 50.0, width: 40.0)),
+        ),
+      ]),
+    );
+  }
 }
