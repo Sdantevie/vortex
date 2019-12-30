@@ -25,8 +25,8 @@ class _HomeState extends State<Home> {
         title: 'FolkTales',
         summary:
             'As Madam Koi Koi and her band of Folktales investigate the murder of the holy priest times races against them as the angels prepare to retaliate. Meanwhile Bush Baby runs into some friends from his past which leads to only more deeper discoveries.',
-        imageUrl:
-            'https://vortex247.com/wp-content/uploads/2019/11/FLK-COVER.jpg'),
+        imageUrl: 'https://vortex247.com/wp-content/uploads/2019/11/FLK-COVER.jpg',
+        tags: ['Action', 'Supernatural', 'Classic']),
     Comic(
         title: 'Wraith House',
         summary:

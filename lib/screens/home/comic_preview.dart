@@ -57,33 +57,65 @@ class ComicPreview extends StatelessWidget {
           delegate: ComicPreviewDynamicHeader(
               title: this.comic.title, backgroundImageUrl: this.comic.imageUrl),
         ),
-        SliverList(
-          delegate: SliverChildListDelegate([
-            Container(
-              padding: EdgeInsets.only(
-                  left: 16.0, right: 16.0, top: 18.0, bottom: 8.0),
-              child: Text(
-                this.comic.summary,
+        SliverPadding(
+          padding: EdgeInsets.only(left: 16.0, right: 16.0),
+          sliver: SliverList(
+            delegate: SliverChildListDelegate([
+              Container(
+                padding: EdgeInsets.only(top: 38.0, bottom: 8.0),
+                child: Text(
+                  this.comic.summary,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'OpenSans',
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 6.0,
+              ),
+              (comic.tags != null && comic.tags.isNotEmpty)
+                  ? Wrap(
+                      children: <Widget>[
+                        ...comic.tags
+                            .map(
+                              (tag) => Container(
+                                margin: EdgeInsets.only(right: 8.0),
+                                decoration: BoxDecoration(
+                                    color: Color(0xFFFF691F),
+                                    borderRadius: BorderRadius.circular(4.0)),
+                                padding: EdgeInsets.all(4.0),
+                                child: Text(
+                                  tag,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'OpenSans',
+                                      fontSize: 12.0),
+                                ),
+                              ),
+                            )
+                            .toList()
+                      ],
+                    )
+                  : Container(),
+              SizedBox(
+                height: 10.0,
+              ),
+              Text(
+                'Characters',
                 style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'OpenSans',
-                ),
+                    color: Color(0xFFD71786),
+                    fontSize: 17.0,
+                    fontFamily: 'OpenSans'),
               ),
-            ),
-            Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: Divider(
-                  color: Color(0xFFFF691F),
-                )),
-            Container(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Row(
-                  children: <Widget>[_buildComicAccess(context)],
-                ),
+              Divider(
+                color: Color(0xFFFF691F),
               ),
-            )
-          ]),
+              Wrap(
+                children: <Widget>[],
+              )
+            ]),
+          ),
         )
       ],
     );

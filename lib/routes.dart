@@ -51,8 +51,8 @@ class RouteGenerator {
       case '/search':
         return MaterialPageRoute(builder: (_) => Search());
       case '/comic_reader':
-        if (args is String) {
-          return MaterialPageRoute(builder: (_) => ComicReader(path: args));
+        if (args is ComicReaderArgs) {
+          return MaterialPageRoute(builder: (_) => ComicReader(args: args));
         }
         return _errorRoute();
       default:

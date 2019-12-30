@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vortex/screens/explore/explore.dart';
 import 'package:vortex/screens/home/home.dart';
-import 'package:vortex/screens/settings/settings.dart';
+import 'package:vortex/screens/settings/profile_page.dart';
 import 'characters/character_tab_header.dart';
 import 'characters/character_content.dart';
 import 'favourite/favourite.dart';
@@ -45,7 +45,7 @@ class _AppContainerState extends State<AppContainer>
     //BottomNavigationData(title: 'Explore', icon: Icon(Icons.explore)),
     BottomNavigationData(title: 'Favourites', icon: Icon(Icons.favorite)),
     BottomNavigationData(title: 'Characters', icon: CharactersIcon()),
-    BottomNavigationData(title: 'More', icon: Icon(Icons.more_horiz))
+    BottomNavigationData(title: 'Profile', icon: Icon(Icons.person))
   ];
 
   @override
@@ -83,17 +83,17 @@ class _AppContainerState extends State<AppContainer>
       //Explore(),
       Favourite(),
       characterHeader,
-      Settings()
+      ProfilePage()
     ];
     return CustomScrollView(
       slivers: <Widget>[
         SliverAppBar(
-          elevation: 20.0,
+          elevation: 0.0,
           pinned: true,
           backgroundColor: Color(0xFF2A2E3D),
           actions: <Widget>[
             Padding(
-                padding: EdgeInsets.only(right: 8.0),
+                padding: EdgeInsets.only(right: 0.0),
                 child: IconButton(
                   onPressed: () {
                     Navigator.of(context).pushNamed('/search');
@@ -113,6 +113,7 @@ class _AppContainerState extends State<AppContainer>
           ),
           expandedHeight: 80.0,
           flexibleSpace: FlexibleSpaceBar(
+            centerTitle: true,
             title: Text(_bottomNavigationData[_selectedIndex].title,
                 style: TextStyle(
                     color: Color(0xFFD71786), fontFamily: 'OpenSans')),

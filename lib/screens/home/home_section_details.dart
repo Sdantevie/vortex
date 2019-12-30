@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vortex/models/comic.dart';
+import 'package:vortex/screens/home/comic_card.dart';
 
 class HomeSectionDetails extends StatelessWidget {
   final HomeSectionDetailsArgs args;
@@ -65,26 +66,30 @@ class HomeSectionDetails extends StatelessWidget {
   }
 
   _buildGridItem(BuildContext context, int index) {
-    return Container(
-        color: Colors.white,
-        // decoration: BoxDecoration(
-        //     borderRadius: BorderRadius.circular(10.0),
-        //     boxShadow: [
-        //       BoxShadow(
-        //           color: Colors.black54,
-        //           offset: Offset(0.0, 4.0),
-        //           blurRadius: 1.0)
-        //     ]),
-        child: GestureDetector(
-          onTap: () {
-            Navigator.of(context).pushNamed('/comic_preview',
-                arguments: this.args.comics[index]);
-          },
-          child: Image.network(
-            this.args.comics[index].imageUrl,
-            fit: BoxFit.cover,
-          ),
-        ));
+    // return Container(
+    //     color: Colors.white,
+    //     // decoration: BoxDecoration(
+    //     //     borderRadius: BorderRadius.circular(10.0),
+    //     //     boxShadow: [
+    //     //       BoxShadow(
+    //     //           color: Colors.black54,
+    //     //           offset: Offset(0.0, 4.0),
+    //     //           blurRadius: 1.0)
+    //     //     ]),
+    //     child: GestureDetector(
+    //       onTap: () {
+    //         Navigator.of(context).pushNamed('/comic_preview',
+    //             arguments: this.args.comics[index]);
+    //       },
+    //       child: Image.network(
+    //         this.args.comics[index].imageUrl,
+    //         fit: BoxFit.cover,
+    //       ),
+    //     ));
+
+    return ComicCard(
+      comic: this.args.comics[index],
+    );
   }
 }
 

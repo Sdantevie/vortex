@@ -13,6 +13,7 @@ class ComicPreviewDynamicHeader extends SliverPersistentHeaderDelegate {
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Stack(
       fit: StackFit.expand,
+      overflow: Overflow.visible,
       children: <Widget>[
         Image.network(
           this.backgroundImageUrl,
@@ -30,29 +31,76 @@ class ComicPreviewDynamicHeader extends SliverPersistentHeaderDelegate {
           ),
         ),
         Positioned(
+            left: 16.0,
+            right: 16.0,
+            bottom: 36.0,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  this.title,
+                  style: TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontSize: 32.0,
+                    color: Color(0xFFD71786)
+                        .withOpacity(titleOpacity(shrinkOffset)),
+                  ),
+                ),
+                SizedBox(
+                  height: 4.0,
+                ),
+              ],
+            )),
+        Positioned(
           left: 16.0,
-          right: 16.0,
-          bottom: 16.0,
-          child: Text(
-            this.title,
-            style: TextStyle(
-              fontSize: 32.0,
-              color: Color(0xFFD71786).withOpacity(titleOpacity(shrinkOffset)),
+          top: 32.0,
+          child: InkWell(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
             ),
           ),
         ),
         Positioned(
-            left: 16,
-            top: 41,
-            child: InkWell(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-              child: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
+          child: Row(
+            children: <Widget>[
+              FloatingActionButton(
+                elevation: 8.0,
+                backgroundColor: Colors.white,
+                child: Icon(
+                  Icons.favorite_border,
+                  color: Colors.red,
+                ),
+                onPressed: () {},
               ),
-            )),
+              SizedBox(
+                width: 4.0,
+              ),
+              ClipRRect(
+                borderRadius:
+                    BorderRadius.horizontal(left: Radius.circular(20.0)),
+                child: RaisedButton(
+                  color: Color(0xFFFF691F),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 15.0, horizontal: 50.0),
+                  onPressed: () {},
+                  child: Text(
+                    'Read Now',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'OpenSans',
+                        fontSize: 15.0),
+                  ),
+                ),
+              )
+            ],
+          ),
+          bottom: -28,
+          right: 0,
+        )
       ],
     );
   }

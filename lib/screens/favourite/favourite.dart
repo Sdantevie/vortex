@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vortex/models/comic.dart';
+import 'package:vortex/screens/home/comic_card.dart';
 
 class Favourite extends StatefulWidget {
   @override
@@ -76,25 +77,8 @@ class _FavouriteState extends State<Favourite> {
   }
 
   _buildGridItem(BuildContext context, int index) {
-    return Container(
-        color: Colors.white,
-        // decoration: BoxDecoration(
-        //     borderRadius: BorderRadius.circular(10.0),
-        //     boxShadow: [
-        //       BoxShadow(
-        //           color: Colors.black54,
-        //           offset: Offset(0.0, 4.0),
-        //           blurRadius: 1.0)
-        //     ]),
-        child: GestureDetector(
-          onTap: () {
-            Navigator.of(context)
-                .pushNamed('/comic_preview', arguments: _comics[index]);
-          },
-          child: Image.network(
-            _comics[index].imageUrl,
-            fit: BoxFit.cover,
-          ),
-        ));
+    return ComicCard(
+      comic: _comics[index],
+    );
   }
 }

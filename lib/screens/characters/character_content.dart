@@ -38,54 +38,6 @@ class CharactersContent extends StatelessWidget {
         abilities: ['Strength', 'Juju Charge'],
         weapons: ['A huge shape-shifting club called “Igwe”'],
         characterRole: CharacterRole.GOOD_GUY),
-    Character(
-        weapons: ['Guns', 'Arrows'],
-        imageUrl:
-            'https://vortex247.com/wp-content/uploads/2017/08/Anikulapo.png',
-        name: 'Anikulapo',
-        summary:
-            '''Anikulapo the 3rd is summoner from a heritage of super naturals known as “The Voice of the Orisha”. He holds the ability to summon gods and conjure powers through music. He uses his power to battle corrupt politics and spirit beings.''',
-        characterRole: CharacterRole.IN_BETWEEN),
-    Character(
-        name: 'Pestle',
-        imageUrl: 'https://vortex247.com/wp-content/uploads/2017/08/Pestle.png',
-        summary:
-            'Pestle is cool, calm and collected. He is just as rash but not as outspoken and often seems to appear responsible. He is Tall, buff and bald. He is a thinker and more often than not gets the duo out of tough situation with both his strength and wit; he has a very soft spot for Ejule who he refers to as “aunty” as he enjoys both her wisdom and cooking',
-        abilities: ['Strength', 'Juju Charge'],
-        weapons: ['A huge shape-shifting club called “Igwe”'],
-        characterRole: CharacterRole.GOOD_GUY),
-    Character(
-        weapons: ['Guns', 'Arrows'],
-        imageUrl:
-            'https://vortex247.com/wp-content/uploads/2017/08/Anikulapo.png',
-        name: 'Anikulapo',
-        summary:
-            '''Anikulapo the 3rd is summoner from a heritage of super naturals known as “The Voice of the Orisha”. He holds the ability to summon gods and conjure powers through music. He uses his power to battle corrupt politics and spirit beings.''',
-        characterRole: CharacterRole.IN_BETWEEN),
-    Character(
-        name: 'Pestle',
-        imageUrl: 'https://vortex247.com/wp-content/uploads/2017/08/Pestle.png',
-        summary:
-            'Pestle is cool, calm and collected. He is just as rash but not as outspoken and often seems to appear responsible. He is Tall, buff and bald. He is a thinker and more often than not gets the duo out of tough situation with both his strength and wit; he has a very soft spot for Ejule who he refers to as “aunty” as he enjoys both her wisdom and cooking',
-        abilities: ['Strength', 'Juju Charge'],
-        weapons: ['A huge shape-shifting club called “Igwe”'],
-        characterRole: CharacterRole.GOOD_GUY),
-    Character(
-        weapons: ['Guns', 'Arrows'],
-        imageUrl:
-            'https://vortex247.com/wp-content/uploads/2017/08/Anikulapo.png',
-        name: 'Anikulapo',
-        summary:
-            '''Anikulapo the 3rd is summoner from a heritage of super naturals known as “The Voice of the Orisha”. He holds the ability to summon gods and conjure powers through music. He uses his power to battle corrupt politics and spirit beings.''',
-        characterRole: CharacterRole.IN_BETWEEN),
-    Character(
-        name: 'Pestle',
-        imageUrl: 'https://vortex247.com/wp-content/uploads/2017/08/Pestle.png',
-        summary:
-            'Pestle is cool, calm and collected. He is just as rash but not as outspoken and often seems to appear responsible. He is Tall, buff and bald. He is a thinker and more often than not gets the duo out of tough situation with both his strength and wit; he has a very soft spot for Ejule who he refers to as “aunty” as he enjoys both her wisdom and cooking',
-        abilities: ['Strength', 'Juju Charge'],
-        weapons: ['A huge shape-shifting club called “Igwe”'],
-        characterRole: CharacterRole.GOOD_GUY)
   ];
 
   List<String> _tabs = ['Good Guys', 'In-Betweens', 'Villain'];
