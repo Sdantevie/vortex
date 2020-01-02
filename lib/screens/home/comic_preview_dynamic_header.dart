@@ -1,12 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:vortex/models/comic.dart';
 
 class ComicPreviewDynamicHeader extends SliverPersistentHeaderDelegate {
-  final String backgroundImageUrl;
-  final String title;
+  final ComicPreviewDynamicHeaderArgs args;
 
-  ComicPreviewDynamicHeader({@required this.backgroundImageUrl, this.title});
+  ComicPreviewDynamicHeader({@required this.args});
 
   @override
   Widget build(
@@ -16,7 +16,7 @@ class ComicPreviewDynamicHeader extends SliverPersistentHeaderDelegate {
       overflow: Overflow.visible,
       children: <Widget>[
         Image.network(
-          this.backgroundImageUrl,
+          this.args.imageUrl,
           fit: BoxFit.cover,
         ),
         Container(
@@ -38,10 +38,11 @@ class ComicPreviewDynamicHeader extends SliverPersistentHeaderDelegate {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  this.title,
+                  this.args.title,
                   style: TextStyle(
                     fontFamily: 'OpenSans',
                     fontSize: 32.0,
+                    fontWeight: FontWeight.bold,
                     color: Color(0xFFD71786)
                         .withOpacity(titleOpacity(shrinkOffset)),
                   ),
@@ -74,7 +75,7 @@ class ComicPreviewDynamicHeader extends SliverPersistentHeaderDelegate {
                   Icons.favorite_border,
                   color: Colors.red,
                 ),
-                onPressed: () {},
+                onPressed: this.args.readNow,
               ),
               SizedBox(
                 width: 4.0,
@@ -120,4 +121,13 @@ class ComicPreviewDynamicHeader extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
+}
+
+class ComicPreviewDynamicHeaderArgs {
+  final String title;
+  final String imageUrl;
+  final VoidCallback readNow;
+
+  ComicPreviewDynamicHeaderArgs(
+      {@required this.title, @required this.imageUrl, this.readNow});
 }

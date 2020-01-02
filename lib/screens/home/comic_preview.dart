@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:vortex/models/comic.dart';
-import 'package:vortex/view_utils/user_inherited.dart';
 
 import 'comic_preview_dynamic_header.dart';
 
@@ -26,28 +25,7 @@ class ComicPreview extends StatelessWidget {
     );
   }
 
-  _buildComicAccess(BuildContext context) {
-    final user = InheritedUser.of(context).provider.user;
-    if (user == null) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            'This content is for Subscription members only.',
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          OutlineButton(
-              borderSide: BorderSide(color: Color(0xFFFF691F)),
-              onPressed: () {},
-              splashColor: Color(0xFFFF691F),
-              child: Text('Login', style: TextStyle(color: Colors.white)))
-        ],
-      );
-    }
-  }
+  _readNow() {}
 
   _buildScrollable(BuildContext context) {
     return CustomScrollView(
@@ -55,7 +33,10 @@ class ComicPreview extends StatelessWidget {
         SliverPersistentHeader(
           pinned: true,
           delegate: ComicPreviewDynamicHeader(
-              title: this.comic.title, backgroundImageUrl: this.comic.imageUrl),
+              args: ComicPreviewDynamicHeaderArgs(
+                  title: comic.title,
+                  imageUrl: comic.imageUrl,
+                  readNow: _readNow)),
         ),
         SliverPadding(
           padding: EdgeInsets.only(left: 16.0, right: 16.0),
@@ -98,22 +79,45 @@ class ComicPreview extends StatelessWidget {
                       ],
                     )
                   : Container(),
-              SizedBox(
-                height: 10.0,
-              ),
-              Text(
-                'Characters',
-                style: TextStyle(
-                    color: Color(0xFFD71786),
-                    fontSize: 17.0,
-                    fontFamily: 'OpenSans'),
-              ),
-              Divider(
-                color: Color(0xFFFF691F),
-              ),
-              Wrap(
-                children: <Widget>[],
-              )
+              (comic.characters != null && comic.characters.isNotEmpty)
+                  ? Padding(
+                      padding: EdgeInsets.all(0.0),
+                      child: ListView(
+                        shrinkWrap: true,
+                        children: <Widget>[
+                          Text(
+                            'Characters',
+                            style: TextStyle(
+                                color: Color(0xFFD71786),
+                                fontSize: 17.0,
+                                fontFamily: 'OpenSans'),
+                          ),
+                          Divider(
+                            color: Color(0xFFFF691F),
+                          ),
+                          Wrap(
+                              children: comic.characters
+                                  .map(
+                                    (character) => Padding(
+                                      padding: EdgeInsets.only(right: 10.0),
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            Navigator.of(context).pushNamed(
+                                                '/character',
+                                                arguments: character);
+                                          },
+                                          child: Image.network(
+                                            character.imageUrl,
+                                            width: 50.0,
+                                            height: 50.0,
+                                          )),
+                                    ),
+                                  )
+                                  .toList())
+                        ],
+                      ),
+                    )
+                  : Container()
             ]),
           ),
         )

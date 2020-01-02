@@ -24,21 +24,25 @@ class ComicCategoryPreview extends StatelessWidget {
     );
   }
 
+  _readNow() {}
+
   _buildScrollable(BuildContext context) {
     return CustomScrollView(
       slivers: <Widget>[
         SliverPersistentHeader(
           pinned: true,
           delegate: ComicPreviewDynamicHeader(
-              title: this.category.title,
-              backgroundImageUrl: this.category.imageUrl),
+              args: ComicPreviewDynamicHeaderArgs(
+                  title: this.category.title,
+                  imageUrl: this.category.imageUrl,
+                  readNow: _readNow)),
         ),
         SliverList(
             delegate: SliverChildListDelegate([
           this.category.summary.isNotEmpty
               ? Container(
                   padding: EdgeInsets.only(
-                      left: 16.0, right: 16.0, top: 18.0, bottom: 8.0),
+                      left: 16.0, right: 16.0, top: 38.0, bottom: 8.0),
                   child: Text(
                     this.category.summary,
                     style: TextStyle(
@@ -46,6 +50,30 @@ class ComicCategoryPreview extends StatelessWidget {
                       fontFamily: 'OpenSans',
                     ),
                   ),
+                )
+              : Container(),
+          (category.tags != null && category.tags.isNotEmpty)
+              ? Wrap(
+                  children: <Widget>[
+                    ...category.tags
+                        .map(
+                          (tag) => Container(
+                            margin: EdgeInsets.only(right: 8.0),
+                            decoration: BoxDecoration(
+                                color: Color(0xFFFF691F),
+                                borderRadius: BorderRadius.circular(4.0)),
+                            padding: EdgeInsets.all(4.0),
+                            child: Text(
+                              tag,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'OpenSans',
+                                  fontSize: 12.0),
+                            ),
+                          ),
+                        )
+                        .toList()
+                  ],
                 )
               : Container(),
           Padding(

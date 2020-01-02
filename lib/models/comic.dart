@@ -1,11 +1,18 @@
 import 'package:meta/meta.dart';
 
+import 'character.dart';
+
 class Comic {
   final String imageUrl;
   final String title;
   final String summary;
   final List<String> tags;
+  final List<Character> characters;
 
   Comic(
-      {@required this.imageUrl, @required this.title, this.summary, this.tags});
+      {@required this.imageUrl,
+      @required this.title,
+      this.summary,
+      this.tags,
+      this.characters});
 }
