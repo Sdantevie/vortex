@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:vortex/models/user.dart';
 
 class ProfileCard extends StatelessWidget {
-  const ProfileCard({Key key}) : super(key: key);
+  final User user;
+  const ProfileCard({Key key, @required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    User user = User(
-        username: 's Daniel',
-        email: 'dstevie9292@gmail.com',
-        subscription: 'Free');
     return Container(
+      padding: EdgeInsets.only(left: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[

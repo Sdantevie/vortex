@@ -92,17 +92,20 @@ class _AppContainerState extends State<AppContainer>
           pinned: true,
           backgroundColor: Color(0xFF2A2E3D),
           actions: <Widget>[
-            Padding(
-                padding: EdgeInsets.only(right: 0.0),
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/search');
-                  },
-                  icon: Icon(
-                    Icons.search,
-                    color: Color(0xFFFF691F),
-                  ),
-                ))
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('/search');
+              },
+              icon: Icon(
+                Icons.search,
+                color: Color(0xFFFF691F),
+              ),
+            ),
+            IconButton(
+              icon: Icon(Icons.shopping_basket),
+              onPressed: () {},
+              color: Color(0xFFFF691F),
+            )
           ],
           leading: CircleAvatar(
             backgroundColor: Colors.transparent,

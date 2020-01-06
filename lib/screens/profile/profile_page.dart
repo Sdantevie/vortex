@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vortex/models/user.dart';
 import 'package:vortex/screens/profile/profile_card.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -6,22 +7,33 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    User user = User(
+        username: 's Daniel',
+        avatarUrl:
+            'https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/10_avatar-512.png',
+        email: 'dstevie9292@gmail.com',
+        subscription: 'Free');
     return SliverPadding(
       padding: EdgeInsets.all(0.0),
       sliver: SliverList(
         delegate: SliverChildListDelegate([
-          ProfileCard(),
+          ProfileCard(user: user),
           SizedBox(
             height: 20.0,
           ),
           CustomListTile(
             leading: Icons.edit,
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed('/edit_profile', arguments: user);
+            },
             title: 'Edit Profile',
           ),
           CustomListTile(
             title: 'Manage Membership',
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context)
+                  .pushNamed('/manage_subscription', arguments: user);
+            },
             leading: Icons.subscriptions,
           ),
           SizedBox(
@@ -30,7 +42,9 @@ class ProfilePage extends StatelessWidget {
           CustomListTile(
             leading: Icons.history,
             title: 'History',
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed('/history');
+            },
           ),
           CustomListTile(
             leading: Icons.file_download,
@@ -47,7 +61,9 @@ class ProfilePage extends StatelessWidget {
           CustomListTile(
             leading: Icons.info,
             title: 'About',
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed('/about');
+            },
           ),
           CustomListTile(
             leading: Icons.exit_to_app,

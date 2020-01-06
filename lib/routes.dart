@@ -6,9 +6,14 @@ import 'package:vortex/screens/home/comic_category_preview.dart';
 import 'package:vortex/screens/home/comic_preview.dart';
 import 'package:vortex/screens/home/comic_reader.dart';
 import 'package:vortex/screens/home/home_section_details.dart';
+import 'package:vortex/screens/profile/about.dart';
+import 'package:vortex/screens/profile/edit_profile.dart';
+import 'package:vortex/screens/profile/history.dart';
+import 'package:vortex/screens/profile/manage_subscription.dart';
 import 'package:vortex/search.dart';
 import 'models/character.dart';
 
+import 'models/user.dart';
 import 'screens/characters/character_page.dart';
 
 class RouteGenerator {
@@ -53,6 +58,21 @@ class RouteGenerator {
       case '/comic_reader':
         if (args is ComicReaderArgs) {
           return MaterialPageRoute(builder: (_) => ComicReader(args: args));
+        }
+        return _errorRoute();
+      case '/history':
+        return MaterialPageRoute(builder: (_) => History());
+      case '/about':
+        return MaterialPageRoute(builder: (_) => About());
+      case '/edit_profile':
+        if (args is User) {
+          return MaterialPageRoute(builder: (_) => EditProfile(user: args));
+        }
+        return _errorRoute();
+      case '/manage_subscription':
+        if (args is User) {
+          return MaterialPageRoute(
+              builder: (_) => ManageSubscription(user: args));
         }
         return _errorRoute();
       default:

@@ -70,6 +70,7 @@ class CharacterPage extends StatelessWidget {
           ),
           expandedHeight: 80.0,
           flexibleSpace: FlexibleSpaceBar(
+            centerTitle: true,
             title: Text(character.name,
                 style: TextStyle(
                     color: Color(0xFFD71786), fontFamily: 'OpenSans')),
