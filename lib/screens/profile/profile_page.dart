@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:vortex/models/user.dart';
 import 'package:vortex/screens/profile/profile_card.dart';
+import 'package:vortex/view_utils/user_inherited.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    User user = User(
-        username: 's Daniel',
-        avatarUrl:
-            'https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/10_avatar-512.png',
-        email: 'dstevie9292@gmail.com',
-        subscription: 'Free');
+    User user = InheritedUser.of(context).provider.user;
+
     return SliverPadding(
       padding: EdgeInsets.all(0.0),
       sliver: SliverList(
         delegate: SliverChildListDelegate([
-          ProfileCard(user: user),
+          //ProfileCard(user: user),
           SizedBox(
             height: 20.0,
           ),
