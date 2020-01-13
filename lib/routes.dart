@@ -15,6 +15,8 @@ import 'package:vortex/search.dart';
 import 'models/character.dart';
 
 import 'models/user.dart';
+import 'screens/auth/sign_in.dart';
+import 'screens/auth/sign_up.dart';
 import 'screens/characters/character_page.dart';
 
 class RouteGenerator {
@@ -78,6 +80,10 @@ class RouteGenerator {
               builder: (_) => ManageSubscription(user: args));
         }
         return _errorRoute();
+      case '/login':
+        return MaterialPageRoute(builder: (_) => SignIn());
+      case '/register':
+        return MaterialPageRoute(builder: (_) => SignUp());
       default:
         return _errorRoute();
     }

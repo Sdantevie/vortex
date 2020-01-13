@@ -17,17 +17,17 @@ class ProfilePage extends StatelessWidget {
         delegate: SliverChildListDelegate([
           user != null ?  ProfileCard(user: user) 
           : Container(
-              padding: EdgeInsets.only(top: 10.0),
+              padding: EdgeInsets.only(top: 20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text("You need to be logged in", style: TextStyle(color:,
-                  olors.white),),
-
-
-""snaSnepO'' :fontFamlytnof                      ,
-                                            
-                                    Row(
+                  Text("Login or Register to access more exciting comics", 
+                  style: TextStyle(
+                      color:Colors.white
+                    ),
+                  ),
+                  SizedBox(height: 8.0),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                     OutlineButton(
@@ -38,7 +38,9 @@ class ProfilePage extends StatelessWidget {
                         'Login',
                         style: TextStyle(color: Color(0xFFFF691F)),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/login');
+                      },
                     ),
                     SizedBox(width: 10),
                     OutlineButton(
@@ -49,7 +51,9 @@ class ProfilePage extends StatelessWidget {
                         'Register',
                         style: TextStyle(color: Color(0xFFFF691F)),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/register');
+                      },
                     ),
                     ]
                   )
