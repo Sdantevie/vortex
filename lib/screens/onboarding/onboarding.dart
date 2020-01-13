@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_text/gradient_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'onboarding_screen_data.dart';
 import 'page_indicator.dart';
 

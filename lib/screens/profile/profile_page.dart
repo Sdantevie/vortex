@@ -8,33 +8,77 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    User user = InheritedUser.of(context).provider.user;
+    // User user = InheritedUser.of(context).provider.user;
+    User user = null;
 
     return SliverPadding(
       padding: EdgeInsets.all(0.0),
       sliver: SliverList(
         delegate: SliverChildListDelegate([
-          //ProfileCard(user: user),
+          user != null ?  ProfileCard(user: user) 
+          : Container(
+              padding: EdgeInsets.only(top: 10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text("You need to be logged in", style: TextStyle(color:,
+                  olors.white),),
+
+
+""snaSnepO'' :fontFamlytnof                      ,
+                                            
+                                    Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                    OutlineButton(
+                      borderSide: BorderSide(color: Color(0xFFFF691F)),
+                      splashColor: Color(0xFFFF691F),
+                      color: Colors.transparent,
+                      child: Text(
+                        'Login',
+                        style: TextStyle(color: Color(0xFFFF691F)),
+                      ),
+                      onPressed: () {},
+                    ),
+                    SizedBox(width: 10),
+                    OutlineButton(
+                      borderSide: BorderSide(color: Color(0xFFFF691F)),
+                      splashColor: Color(0xFFFF691F),
+                      color: Colors.transparent,
+                      child: Text(
+                        'Register',
+                        style: TextStyle(color: Color(0xFFFF691F)),
+                      ),
+                      onPressed: () {},
+                    ),
+                    ]
+                  )
+                ],
+              ),
+          ),
           SizedBox(
             height: 20.0,
           ),
-          CustomListTile(
+          user != null ? CustomListTile(
             leading: Icons.edit,
             onTap: () {
               Navigator.of(context).pushNamed('/edit_profile', arguments: user);
             },
             title: 'Edit Profile',
+          ) : Container(),
+          SizedBox(
+            height: 5.0,
           ),
-          CustomListTile(
+          user != null ? CustomListTile(
             title: 'Manage Membership',
             onTap: () {
               Navigator.of(context)
                   .pushNamed('/manage_subscription', arguments: user);
             },
             leading: Icons.subscriptions,
-          ),
+          ) : Container(),
           SizedBox(
-            height: 10.0,
+            height: 5.0,
           ),
           CustomListTile(
             leading: Icons.history,
@@ -42,6 +86,9 @@ class ProfilePage extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushNamed('/history');
             },
+          ),
+          SizedBox(
+            height: 5.0,
           ),
           CustomListTile(
             leading: Icons.file_download,
@@ -53,7 +100,7 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 10.0,
+            height: 5.0,
           ),
           CustomListTile(
             leading: Icons.info,
@@ -61,6 +108,9 @@ class ProfilePage extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushNamed('/about');
             },
+          ),
+          SizedBox(
+            height: 5.0,
           ),
           CustomListTile(
             leading: Icons.exit_to_app,
