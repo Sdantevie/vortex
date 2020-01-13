@@ -15,6 +15,7 @@ import 'models/character.dart';
 
 import 'models/user.dart';
 import 'screens/characters/character_page.dart';
+import 'screens/onboarding/onboarding.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -22,7 +23,7 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => AppContainer());
+        return MaterialPageRoute(builder: (_) => Onboarding());
       case '/character':
         if (args is Character) {
           return MaterialPageRoute(

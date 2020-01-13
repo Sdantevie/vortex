@@ -200,6 +200,7 @@ class _HomeState extends State<Home> {
                     child: Image.network(
                       _comicCategories[index].imageUrl,
                       height: 160.0,
+                      width: double.infinity,
                       fit: BoxFit.cover,
                     ),
                   ),
