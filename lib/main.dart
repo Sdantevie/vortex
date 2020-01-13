@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vortex/models/user_provider.dart';
 import 'package:vortex/view_utils/user_inherited.dart';
 
 import 'routes.dart';
 
-void main() => runApp(MyApp());
+bool firstTime;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  firstTime = preferences.getBool('visited') ?? true;
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -18,7 +26,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        initialRoute: '/',
+        initialRoute: firstTime ? '/onboarding' : '/',
         onGenerateRoute: RouteGenerator.generateRoute,
       ),
     );

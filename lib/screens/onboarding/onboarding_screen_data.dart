@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 
 var pageList = [
-  OnboardingScreen(title: "Read", body: "Exciting Comics", colorGradient: gradient[0]),
-  OnboardingScreen(title: "Share", body: "Exciting Stuff", colorGradient: gradient[1])
+  OnboardingScreen(
+      title: "Read",
+      body: "Exciting Comics",
+      imageUrl: 'assets/images/Strike-Guard-9-Cover.jpg',
+      colorGradient: gradient[0]),
+  OnboardingScreen(
+      title: "Share",
+      body: "Exciting Stuff",
+      imageUrl: 'assets/images/Strike-Guard-9-Cover.jpg',
+      colorGradient: gradient[1])
 ];
 
 var gradient = [
@@ -10,11 +18,17 @@ var gradient = [
   [Colors.lightBlue, Colors.orangeAccent]
 ];
 
-class OnboardingScreen{
+class OnboardingScreen {
   final String title;
   final String body;
   final String assetUrl;
   final List<Color> colorGradient;
+  final String imageUrl;
 
-  OnboardingScreen({this.title, this.body, this.assetUrl, this.colorGradient});
+  OnboardingScreen(
+      {this.title,
+      this.body,
+      this.assetUrl,
+      this.colorGradient,
+      this.imageUrl});
 }

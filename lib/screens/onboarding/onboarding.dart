@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_text/gradient_text.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'onboarding_screen_data.dart';
 import 'page_indicator.dart';
@@ -31,7 +32,7 @@ class _OnboardingState extends State<Onboarding> {
     return Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-              colors: [Colors.black12, Colors.grey[850]],
+              colors: [Color(0xFF2A2E3D), Color(0xFF040313)],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               tileMode: TileMode.clamp,
@@ -59,57 +60,59 @@ class _OnboardingState extends State<Onboarding> {
                             return Stack(
                               fit: StackFit.expand,
                               children: <Widget>[
-                                AnimatedBuilder(
-                                  animation: _pageController,
-                                  builder: (context, child) {
-                                    var page = pageList[index];
-                                    return Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: <Widget>[
-                                        Container(
-                                          height: 90.0,
-                                          margin: EdgeInsets.only(left: 12.0),
-                                          child: Stack(
-                                            children: <Widget>[
-                                              Opacity(
-                                                  opacity: .10,
+                                Positioned.fill(
+                                  child: AnimatedBuilder(
+                                    animation: _pageController,
+                                    builder: (context, child) {
+                                      var page = pageList[index];
+                                      return Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Container(
+                                            height: 90.0,
+                                            margin: EdgeInsets.only(left: 12.0),
+                                            child: Stack(
+                                              children: <Widget>[
+                                                Opacity(
+                                                    opacity: .10,
+                                                    child: GradientText(
+                                                        page.title,
+                                                        gradient: LinearGradient(
+                                                            colors: page
+                                                                .colorGradient),
+                                                        style: TextStyle(
+                                                            fontSize: 100.0))),
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 25.0, left: 22.0),
                                                   child: GradientText(
                                                       page.title,
                                                       gradient: LinearGradient(
                                                           colors: page
                                                               .colorGradient),
                                                       style: TextStyle(
-                                                          fontSize: 100.0))),
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                    top: 25.0, left: 22.0),
-                                                child: GradientText(page.title,
-                                                    gradient: LinearGradient(
-                                                        colors:
-                                                            page.colorGradient),
-                                                    style: TextStyle(
-                                                        fontSize: 70.0)),
-                                              )
-                                            ],
+                                                          fontSize: 70.0)),
+                                                )
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 38.0, top: 0),
-                                          child: Text(
-                                            page.body,
-                                            style: TextStyle(
-                                                fontSize: 20.0,
-                                                color: Colors.grey),
-                                          ),
-                                        )
-                                      ],
-                                    );
-                                  },
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                left: 38.0, top: 0),
+                                            child: Text(
+                                              page.body,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  color: Colors.grey),
+                                            ),
+                                          )
+                                        ],
+                                      );
+                                    },
+                                  ),
                                 )
                               ],
                             );
@@ -134,7 +137,9 @@ class _OnboardingState extends State<Onboarding> {
                                     Icons.arrow_forward_ios,
                                     color: Colors.black,
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    _enterApp(context);
+                                  },
                                 )
                               : Container())
                     ],
@@ -142,5 +147,12 @@ class _OnboardingState extends State<Onboarding> {
                 ),
               ),
             )));
+  }
+
+  void _enterApp(BuildContext context) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setBool('visited', false);
+
+    Navigator.of(context).pushNamed('/');
   }
 }

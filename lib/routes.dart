@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vortex/models/comic.dart';
 import 'package:vortex/models/comic_category.dart';
 import 'package:vortex/screens/app_container.dart';
@@ -6,6 +7,7 @@ import 'package:vortex/screens/home/comic_category_preview.dart';
 import 'package:vortex/screens/home/comic_preview.dart';
 import 'package:vortex/screens/home/comic_reader.dart';
 import 'package:vortex/screens/home/home_section_details.dart';
+import 'package:vortex/screens/onboarding/onboarding.dart';
 import 'package:vortex/screens/profile/about.dart';
 import 'package:vortex/screens/profile/edit_profile.dart';
 import 'package:vortex/screens/profile/history.dart';
@@ -23,6 +25,8 @@ class RouteGenerator {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => AppContainer());
+      case '/onboarding':
+        return MaterialPageRoute(builder: (_) => Onboarding());
       case '/character':
         if (args is Character) {
           return MaterialPageRoute(
