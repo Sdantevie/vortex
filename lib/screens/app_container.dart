@@ -116,7 +116,6 @@ class _AppContainerState extends State<AppContainer>
           ),
           expandedHeight: 80.0,
           flexibleSpace: FlexibleSpaceBar(
-            centerTitle: true,
             title: Text(_bottomNavigationData[_selectedIndex].title,
                 style: TextStyle(
                     color: Color(0xFFD71786), fontFamily: 'OpenSans')),

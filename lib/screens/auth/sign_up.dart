@@ -13,129 +13,110 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
 
-    InputDecoration _decoration = InputDecoration(
-      filled: true,
-      fillColor: Color(0xFF2A2E3D),
-      contentPadding: EdgeInsets.all(8.0),
-      focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xFFD71786), width: 1.0)),
-      enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xFFFF691F), width: 1.0)),
-    );
-
-    TextStyle _labelStyle = TextStyle(
-        color: Colors.black,
-        fontFamily: 'OpenSans',
-        fontSize: ScreenUtil.getInstance().setSp(40));
-
-    TextStyle _textFieldStyle =
-        TextStyle(color: Colors.white, fontFamily: 'OpenSans');
-
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            colors: [Color(0xFF040313), Color(0xFF2A2E3D)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            tileMode: TileMode.clamp,
-            stops: [0.0, 1.0]),
-      ),
-      child: Scaffold(
+   return Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: [Color(0xFF2A2E3D), Color(0xFF040313)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              tileMode: TileMode.clamp,
+              stops: [0.0, 1.0]),
+        ),
+        child: Scaffold(
           backgroundColor: Colors.transparent,
-          resizeToAvoidBottomPadding: true,
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 50.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+          body: _buildScrollable(),
+        ));
+  }
+
+  _buildScrollable() {
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverAppBar(
+          elevation: 4.0,
+          pinned: true,
+          backgroundColor: Color(0xFF2A2E3D),
+          leading: InkWell(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+          ),
+          expandedHeight: 80.0,
+          flexibleSpace: FlexibleSpaceBar(
+            title: Text('Register',
+                style: TextStyle(
+                    color: Color(0xFFD71786), fontFamily: 'OpenSans')),
+          ),
+        ),
+        SliverPadding(
+          padding: EdgeInsets.only(top: 44.0, left: 16.0, right: 16.0),
+          sliver: SliverList(
+            delegate: SliverChildListDelegate([
+              TextField(
+                  cursorColor: Color(0xFFFF691F),
+                  style: TextStyle(color: Colors.white, fontFamily: 'OpenSans'),
+                  decoration: _generateDecoration('Username')),
+              SizedBox(
+                height: 30.0,
+              ),
+              TextField(
+                  cursorColor: Color(0xFFFF691F),
+                  style: TextStyle(color: Colors.white, fontFamily: 'OpenSans'),
+                  decoration: _generateDecoration('Email')),
+              SizedBox(
+                height: 25.0,
+              ),
+               TextField(
+                  obscureText: true,
+                  cursorColor: Color(0xFFFF691F),
+                  style: TextStyle(color: Colors.white, fontFamily: 'OpenSans'),
+                  decoration: _generateDecoration('Password')),
+              SizedBox(
+                height: 25.0,
+              ),
+               TextField(
+                  obscureText: true,
+                  cursorColor: Color(0xFFFF691F),
+                  style: TextStyle(color: Colors.white, fontFamily: 'OpenSans'),
+                  decoration: _generateDecoration('Confirm Password')),
+              SizedBox(
+                height: 25.0,
+              ),
+              Row(
                 children: <Widget>[
-                  Image.asset(
-                    "assets/images/vortex247.png",
-                    width: ScreenUtil.getInstance().setWidth(100),
-                    height: ScreenUtil.getInstance().setHeight(100),
-                  ),
-                  SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(120),
-                  ),
-                  Text("Register",
+                  FlatButton(
+                    color: Color(0xFFFF691F),
+                    splashColor: Color(0xFFD71786),
+                    onPressed: () {},
+                    child: Text(
+                      "Login",
                       style: TextStyle(
-                          fontSize: 30.0,
                           color: Colors.white,
-                          fontFamily: 'OpenSans')),
-                  Container(
-                    width: double.infinity,
-                    margin: EdgeInsets.only(top: 10.0),
-                    height: ScreenUtil.getInstance().setHeight(1100),
-                    decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.4),
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(8.0)),
-                    child: Padding(
-                      padding:
-                          EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          SizedBox(
-                            height: ScreenUtil.getInstance().setHeight(10),
-                          ),
-                          Text(
-                            "Username",
-                            style: _labelStyle,
-                          ),
-                          TextField(
-                              cursorColor: Colors.white,
-                              style: _textFieldStyle,
-                              decoration: _decoration),
-                          SizedBox(
-                            height: ScreenUtil.getInstance().setHeight(35),
-                          ),
-                          Text("Email", style: _labelStyle),
-                          TextField(
-                              cursorColor: Colors.white,
-                              style: _textFieldStyle,
-                              decoration: _decoration),
-                          SizedBox(
-                            height: ScreenUtil.getInstance().setHeight(35),
-                          ),
-                          Text("Password", style: _labelStyle),
-                          TextField(
-                              cursorColor: Colors.white,
-                              keyboardType: TextInputType.visiblePassword,
-                              style: _textFieldStyle,
-                              decoration: _decoration),
-                          SizedBox(
-                            height: ScreenUtil.getInstance().setHeight(35),
-                          ),
-                          Text("Confirm Password", style: _labelStyle),
-                          TextField(
-                              cursorColor: Colors.white,
-                              keyboardType: TextInputType.visiblePassword,
-                              style: _textFieldStyle,
-                              decoration: _decoration),
-                          SizedBox(
-                            height: ScreenUtil.getInstance().setHeight(60),
-                          ),
-                          FlatButton(
-                            color: Color(0xFFFF691F),
-                            splashColor: Color(0xFFD71786),
-                            onPressed: () {},
-                            child: Text(
-                              "Register",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18.0,
-                                  fontFamily: 'OpenSans'),
-                            ),
-                          )
-                        ],
-                      ),
+                          fontSize: 18.0,
+                          fontFamily: 'OpenSans'),
                     ),
                   )
                 ],
-              ),
-            ),
-          )),
+              )
+            ]),
+          ),
+        )
+      ],
     );
+  }
+
+  InputDecoration _generateDecoration(String label) {
+    return InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: -2.0, horizontal: 10.0),
+        labelText: label,
+        labelStyle: TextStyle(
+            fontFamily: 'OpenSans', color: Color(0xFFFF691F), fontSize: 17.0),
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0xFFFF691F))),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0xFFFF691F))));
   }
 }

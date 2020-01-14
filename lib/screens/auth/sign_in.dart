@@ -13,24 +13,6 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
 
-    InputDecoration _decoration = InputDecoration(
-      filled: true,
-      fillColor: Color(0xFF2A2E3D),
-      contentPadding: EdgeInsets.all(8.0),
-      focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xFFD71786), width: 1.0)),
-      enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xFFFF691F), width: 1.0)),
-    );
-
-    TextStyle _labelStyle = TextStyle(
-        color: Colors.black,
-        fontFamily: 'OpenSans',
-        fontSize: ScreenUtil.getInstance().setSp(40));
-
-    TextStyle _textFieldStyle =
-        TextStyle(color: Colors.white, fontFamily: 'OpenSans');
-
     return Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(

@@ -1,7 +1,11 @@
+import 'dart:io';
 import 'dart:math';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:vortex/models/comic.dart';
+import 'package:path_provider/path_provider.dart';
+
+import 'comic_reader.dart';
 
 class ComicPreviewDynamicHeader extends SliverPersistentHeaderDelegate {
   final ComicPreviewDynamicHeaderArgs args;
@@ -16,7 +20,7 @@ class ComicPreviewDynamicHeader extends SliverPersistentHeaderDelegate {
       overflow: Overflow.visible,
       children: <Widget>[
         Image.network(
-          this.args.imageUrl,
+          this.args.comic.imageUrl,
           fit: BoxFit.cover,
         ),
         Container(
@@ -38,7 +42,7 @@ class ComicPreviewDynamicHeader extends SliverPersistentHeaderDelegate {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  this.args.title,
+                  this.args.comic.title,
                   style: TextStyle(
                     fontFamily: 'OpenSans',
                     fontSize: 32.0,
@@ -75,7 +79,14 @@ class ComicPreviewDynamicHeader extends SliverPersistentHeaderDelegate {
                   Icons.favorite_border,
                   color: Colors.red,
                 ),
-                onPressed: this.args.readNow,
+                onPressed: () {
+                   getFileFromUrl(
+                            '')
+                        .then((file) {
+                      Navigator.of(context).pushNamed('/comic_reader',
+                          arguments: ComicReaderArgs(comic: this.args.comic, path: file.path));
+                    });
+                }
               ),
               SizedBox(
                 width: 4.0,
@@ -121,13 +132,32 @@ class ComicPreviewDynamicHeader extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
+
+  Future<File> getFileFromUrl(String url) async {
+    try {
+      var data = await http.get(url);
+      var bytes = data.bodyBytes;
+      var dir = await getApplicationDocumentsDirectory();
+      File file = File('${dir.path}/sample.pdf');
+
+      File urlFile = await file.writeAsBytes(bytes);
+      return urlFile;
+    } catch (e) {
+      throw Exception('Error Opening url file');
+    }
+  }
 }
 
 class ComicPreviewDynamicHeaderArgs {
-  final String title;
-  final String imageUrl;
-  final VoidCallback readNow;
+  Comic comic;
+  final String comicUrl;
+   String title;
+   String imageUrl;
 
   ComicPreviewDynamicHeaderArgs(
-      {@required this.title, @required this.imageUrl, this.readNow});
+      {@required this.comic, this.comicUrl});
+
+  ComicPreviewDynamicHeaderArgs.fromParams({@required this.comicUrl, title, imageUrl}){
+    comic = Comic(imageUrl: imageUrl, title: title);
+  }
 }

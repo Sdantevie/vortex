@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:vortex/models/comic.dart';
-
 import 'comic_preview_dynamic_header.dart';
 
 class ComicPreview extends StatelessWidget {
@@ -25,7 +24,9 @@ class ComicPreview extends StatelessWidget {
     );
   }
 
-  _readNow() {}
+  String _getComicUrl(){
+    return 'https://vortex247.com/wp-content/uploads/2019/12/Folktales-2-Compressed.pdf';
+  }
 
   _buildScrollable(BuildContext context) {
     return CustomScrollView(
@@ -34,9 +35,8 @@ class ComicPreview extends StatelessWidget {
           pinned: true,
           delegate: ComicPreviewDynamicHeader(
               args: ComicPreviewDynamicHeaderArgs(
-                  title: comic.title,
-                  imageUrl: comic.imageUrl,
-                  readNow: _readNow)),
+                  comic: comic,
+                  comicUrl: _getComicUrl())),
         ),
         SliverPadding(
           padding: EdgeInsets.only(left: 16.0, right: 16.0),
