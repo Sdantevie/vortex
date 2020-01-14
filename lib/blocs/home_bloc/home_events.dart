@@ -1,5 +1,9 @@
-import '../../../../.pub_cache/hosted/pub.dartlang.org/equatable-1.0.2/lib/equatable.dart';
+import 'package:equatable/equatable.dart';
 
-class HomeEvent extends Equatable {
-  HomeEvent([List props = const []]) : super(props);
+abstract class HomeEvent extends Equatable {
+ const HomeEvent();
+ @override
+  List<Object> get props => [];
 }
+
+class HomeLoadDataEvent extends HomeEvent {}
