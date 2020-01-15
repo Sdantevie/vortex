@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'app_data.dart';
 
+import '../../models/app_data.dart';
 abstract class AppState extends Equatable{
  const AppState();
 
@@ -11,8 +11,7 @@ abstract class AppState extends Equatable{
 
 class AppInitialState extends AppState {}
 
-class AppLoadingState extends AppState {
-}
+class AppLoadingState extends AppState {}
 
 class AppLoadedState extends AppState {
   final AppData data;
@@ -24,3 +23,10 @@ class AppLoadedState extends AppState {
 }
 
 class AppErrorState extends AppState {}
+
+/***
+ * Batch HTTP Get Call
+ * Home Fetching Data from AppBloc
+ * Checking For NetWork Connectivity
+ * Implement the remaining blocs
+ */
