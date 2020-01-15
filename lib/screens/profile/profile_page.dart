@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vortex/models/user.dart';
 import 'package:vortex/screens/profile/profile_card.dart';
-import 'package:vortex/view_utils/user_inherited.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key key}) : super(key: key);
@@ -15,72 +14,76 @@ class ProfilePage extends StatelessWidget {
       padding: EdgeInsets.all(0.0),
       sliver: SliverList(
         delegate: SliverChildListDelegate([
-          user != null ?  ProfileCard(user: user) 
-          : Container(
-              padding: EdgeInsets.only(top: 20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text("Login or Register to access more exciting comics", 
-                  style: TextStyle(
-                      color:Colors.white
-                    ),
-                  ),
-                  SizedBox(height: 8.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+          user != null
+              ? ProfileCard(user: user)
+              : Container(
+                  padding: EdgeInsets.only(top: 20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                    OutlineButton(
-                      borderSide: BorderSide(color: Color(0xFFFF691F)),
-                      splashColor: Color(0xFFFF691F),
-                      color: Colors.transparent,
-                      child: Text(
-                        'Login',
-                        style: TextStyle(color: Color(0xFFFF691F)),
+                      Text(
+                        "Login or Register to access more exciting comics",
+                        style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/login');
-                      },
-                    ),
-                    SizedBox(width: 10),
-                    OutlineButton(
-                      borderSide: BorderSide(color: Color(0xFFFF691F)),
-                      splashColor: Color(0xFFFF691F),
-                      color: Colors.transparent,
-                      child: Text(
-                        'Register',
-                        style: TextStyle(color: Color(0xFFFF691F)),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/register');
-                      },
-                    ),
-                    ]
-                  )
-                ],
-              ),
-          ),
+                      SizedBox(height: 8.0),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            OutlineButton(
+                              borderSide: BorderSide(color: Color(0xFFFF691F)),
+                              splashColor: Color(0xFFFF691F),
+                              color: Colors.transparent,
+                              child: Text(
+                                'Login',
+                                style: TextStyle(color: Color(0xFFFF691F)),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pushNamed('/login');
+                              },
+                            ),
+                            SizedBox(width: 10),
+                            OutlineButton(
+                              borderSide: BorderSide(color: Color(0xFFFF691F)),
+                              splashColor: Color(0xFFFF691F),
+                              color: Colors.transparent,
+                              child: Text(
+                                'Register',
+                                style: TextStyle(color: Color(0xFFFF691F)),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pushNamed('/register');
+                              },
+                            ),
+                          ])
+                    ],
+                  ),
+                ),
           SizedBox(
             height: 20.0,
           ),
-          user != null ? CustomListTile(
-            leading: Icons.edit,
-            onTap: () {
-              Navigator.of(context).pushNamed('/edit_profile', arguments: user);
-            },
-            title: 'Edit Profile',
-          ) : Container(),
+          user != null
+              ? CustomListTile(
+                  leading: Icons.edit,
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushNamed('/edit_profile', arguments: user);
+                  },
+                  title: 'Edit Profile',
+                )
+              : Container(),
           SizedBox(
             height: 5.0,
           ),
-          user != null ? CustomListTile(
-            title: 'Manage Membership',
-            onTap: () {
-              Navigator.of(context)
-                  .pushNamed('/manage_subscription', arguments: user);
-            },
-            leading: Icons.subscriptions,
-          ) : Container(),
+          user != null
+              ? CustomListTile(
+                  title: 'Manage Membership',
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushNamed('/manage_subscription', arguments: user);
+                  },
+                  leading: Icons.subscriptions,
+                )
+              : Container(),
           SizedBox(
             height: 5.0,
           ),

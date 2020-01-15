@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:vortex/screens/explore/explore.dart';
 import 'package:vortex/screens/home/home.dart';
 import 'package:vortex/screens/profile/profile_page.dart';
 import 'characters/character_tab_header.dart';

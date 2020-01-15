@@ -1,10 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:vortex/models/comic_category.dart';
 
 import 'comic_preview_dynamic_header.dart';
-import 'comic_reader.dart';
 
 class ComicCategoryPreview extends StatelessWidget {
   final ComicCategory category;
@@ -27,9 +24,7 @@ class ComicCategoryPreview extends StatelessWidget {
     );
   }
 
-  String _getComicUrl() {
-  
-  }
+  _getComicUrl() {}
 
   _buildScrollable(BuildContext context) {
     return CustomScrollView(
