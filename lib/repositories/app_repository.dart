@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:vortex/models/comic.dart';
 import 'package:vortex/models/comic_category.dart';
 import 'package:vortex/models/tags.dart';
@@ -43,7 +45,15 @@ class AppRepository {
     }
   }
 
-  List<Comic> _processComics(http.Response reponse) => [];
+  List<Comic> _processComics(http.Response response) {
+    List<Comic> listOfComics = [];
+    final List<dynamic> jsonContent = jsonDecode(response.body);
+    jsonContent.forEach((content) {
+      final comicData = content as Map<String, dynamic>;
+      var comic = Comic(title: )
+    });
+  }
+
   List<ComicCategory> _processComicCategory(http.Response response) => [];
   List<Tags> _processTags(http.Response response) => [];
 }

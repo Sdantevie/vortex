@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vortex/blocs/app_bloc/app_bloc.dart';
+import 'package:vortex/blocs/home_bloc/home_bloc.dart';
+import 'package:vortex/blocs/home_bloc/home_states.dart';
 import 'package:vortex/models/character.dart';
 import 'package:vortex/models/comic.dart';
 import 'package:vortex/models/comic_category.dart';
@@ -117,42 +121,52 @@ class _HomeState extends State<Home> {
   ];
   @override
   Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildListDelegate([
-        Container(
-          height: 200,
-          width: double.infinity,
-          child: PageView.builder(
-            controller: _pageController,
-            itemCount: _comicCategories.length,
-            itemBuilder: (BuildContext context, int index) {
-              return _comicShowcase(context, index);
-            },
-          ),
-        ),
-        SizedBox(
-          height: 20.0,
-        ),
-        Padding(
-          child: HomeSection(title: 'Trending Now', comics: _comicsCover),
-          padding: EdgeInsets.only(left: 16.0, right: 16.0),
-        ),
-        SizedBox(
-          height: 20.0,
-        ),
-        Padding(
-          child: HomeSection(title: 'Latest Release', comics: _comicsCover),
-          padding: EdgeInsets.only(left: 16.0, right: 16.0),
-        ),
-        SizedBox(
-          height: 20.0,
-        ),
-        Padding(
-          child: HomeSection(title: 'Vortex Mini', comics: _comicsCover),
-          padding: EdgeInsets.only(left: 16.0, right: 16.0),
-        ),
-      ]),
-      //padding: EdgeInsets.only(top: 0.0, bottom: 8.0),
+    //ignore: close_sinks
+    final HomeBloc homeBloc =
+        HomeBloc(appBloc: BlocProvider.of<AppBloc>(context));
+
+    return BlocBuilder<HomeBloc, HomeState>(
+      bloc: homeBloc,
+      builder: (context, state) {
+        print(state);
+        return SliverList(
+          delegate: SliverChildListDelegate([
+            Container(
+              height: 200,
+              width: double.infinity,
+              child: PageView.builder(
+                controller: _pageController,
+                itemCount: _comicCategories.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return _comicShowcase(context, index);
+                },
+              ),
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Padding(
+              child: HomeSection(title: 'Trending Now', comics: _comicsCover),
+              padding: EdgeInsets.only(left: 16.0, right: 16.0),
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Padding(
+              child: HomeSection(title: 'Latest Release', comics: _comicsCover),
+              padding: EdgeInsets.only(left: 16.0, right: 16.0),
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Padding(
+              child: HomeSection(title: 'Vortex Mini', comics: _comicsCover),
+              padding: EdgeInsets.only(left: 16.0, right: 16.0),
+            ),
+          ]),
+          //padding: EdgeInsets.only(top: 0.0, bottom: 8.0),
+        );
+      },
     );
   }
 
