@@ -2,8 +2,9 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import '../../models/app_data.dart';
-abstract class AppState extends Equatable{
- const AppState();
+
+abstract class AppState extends Equatable {
+  const AppState();
 
   @override
   List<Object> get props => [];
@@ -25,7 +26,6 @@ class AppLoadedState extends AppState {
 class AppErrorState extends AppState {}
 
 /***
- * Batch HTTP Get Call
  * Home Fetching Data from AppBloc
  * Checking For NetWork Connectivity
  * Implement the remaining blocs

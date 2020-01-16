@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:vortex/screens/home/home.dart';
-import 'package:vortex/screens/profile/profile_page.dart';
-import 'characters/character_tab_header.dart';
+
+import '../blocs/app_bloc/app_bloc.dart';
+import '../blocs/app_bloc/app_events.dart';
 import 'characters/character_content.dart';
+import 'characters/character_tab_header.dart';
 import 'favourite/favourite.dart';
+import 'home/home.dart';
+import 'profile/profile_page.dart';
 
 class AppContainer extends StatefulWidget {
   AppContainer({Key key}) : super(key: key);
@@ -50,6 +54,11 @@ class _AppContainerState extends State<AppContainer>
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
+
+    //ignore: close_sinks
+    final AppBloc appBloc = BlocProvider.of<AppBloc>(context);
+    appBloc.add(AppLoadDataEvent());
+
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
