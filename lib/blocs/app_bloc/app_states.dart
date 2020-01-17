@@ -26,7 +26,7 @@ class AppLoadedState extends AppState {
 class AppErrorState extends AppState {}
 
 /***
- * Home Fetching Data from AppBloc
  * Checking For NetWork Connectivity
  * Implement the remaining blocs
+ * Fetch Tags
  */
