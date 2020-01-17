@@ -10,11 +10,18 @@ import 'package:meta/meta.dart';
 class AppRepository {
   static const baseUrl = 'https://vortex247.com/wp-json/wp/v2/';
   final http.Client httpClient;
+  List<dynamic> mediaData = [];
 
   AppRepository({@required this.httpClient}) : assert(httpClient != null);
 
   Future<AppData> getAppData() async {
     try {
+      final mediaResponse = await httpClient.get(baseUrl + 'media/?per_page=100');
+       if (mediaResponse.statusCode == 404) {
+        throw Exception('failure');
+      }
+      mediaData = jsonDecode(mediaResponse.body);
+
       final comicsResponse =
           await httpClient.get(baseUrl + 'posts/?per_page=100');
       if (comicsResponse.statusCode == 404) {
@@ -50,8 +57,24 @@ class AppRepository {
     final List<dynamic> jsonContent = jsonDecode(response.body);
     jsonContent.forEach((content) {
       final comicData = content as Map<String, dynamic>;
-      var comic = Comic(title: )
+      var comic = Comic(
+        title: comicData['title']['rendered'], 
+        summary: _processSummary(comicData['excerpt']['rendered']),
+        imageUrl: _getImageUrl(comicData['featured_media']),
+      );
+
+      listOfComics.add(comic);
     });
+
+    return listOfComics;
+  }
+
+  String _getImageUrl(int id){
+
+  }
+
+  String _processSummary(String summaryData){
+
   }
 
   List<ComicCategory> _processComicCategory(http.Response response) => [];
