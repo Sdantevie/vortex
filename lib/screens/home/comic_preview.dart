@@ -24,7 +24,7 @@ class ComicPreview extends StatelessWidget {
     );
   }
 
-  String _getComicUrl(){
+  String _getComicUrl() {
     return 'https://vortex247.com/wp-content/uploads/2019/12/Folktales-2-Compressed.pdf';
   }
 
@@ -35,8 +35,7 @@ class ComicPreview extends StatelessWidget {
           pinned: true,
           delegate: ComicPreviewDynamicHeader(
               args: ComicPreviewDynamicHeaderArgs(
-                  comic: comic,
-                  comicUrl: _getComicUrl())),
+                  comic: comic, comicUrl: _getComicUrl())),
         ),
         SliverPadding(
           padding: EdgeInsets.only(left: 16.0, right: 16.0),
@@ -67,7 +66,7 @@ class ComicPreview extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(4.0)),
                                 padding: EdgeInsets.all(4.0),
                                 child: Text(
-                                  tag,
+                                  tag.name,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'OpenSans',

@@ -7,8 +7,7 @@ import 'tags.dart';
 class AppData {
   final List<Comic> comics;
   final List<ComicCategory> category;
-  final List<Tags> tags;
+  // final List<Tags> tags;
 
-  AppData(
-      {@required this.comics, @required this.category, @required this.tags});
+  AppData({@required this.comics, @required this.category});
 }
