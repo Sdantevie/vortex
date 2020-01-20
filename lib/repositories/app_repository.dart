@@ -30,17 +30,9 @@ class AppRepository {
 
       final comics = _processComics(response[2]);
 
-      // final comicCategoryResponse = await httpClient
-      //     .get(baseUrl + '/wp-json/wp/v2/categories/?per_page=100');
-
-      // if (comicCategoryResponse.statusCode == 404) {
-      //   throw Exception('failure');
-      // }
-
-      // final comicCategory = _processComicCategory(comicCategoryResponse);
-
       final data = AppData(
-          // tags: _processTags(tagsResponse),
+          tags: _processTags(response[1]),
+          category: _processComicCategory(response[3]),
           comics: comics);
       return data;
 
@@ -50,7 +42,16 @@ class AppRepository {
     }
   }
 
-  _processTags(http.Response response) {}
+  List<Tags> _processTags(http.Response response) {
+    List<Tags> listOfTags = [];
+    final List<dynamic> jsonContent = jsonDecode(response.body);
+    jsonContent.forEach((content){
+      final tagData = content as Map<String, dynamic>;
+      var tag = Tags(id: tagData['id'], name: tagData['name']);
+      listOfTags.add(tag);
+    });
+    return listOfTags;
+  }
 
   List<Comic> _processComics(http.Response response) {
     List<Comic> listOfComics = [];
@@ -67,7 +68,6 @@ class AppRepository {
       listOfComics.add(comic);
     });
 
-    print(listOfComics[0]);
     return listOfComics;
   }
 
@@ -89,7 +89,24 @@ class AppRepository {
     return 'Hello';
   }
 
-  List<ComicCategory> _processComicCategory(http.Response response) => [];
+  List<ComicCategory> _processComicCategory(http.Response response){
+    List<ComicCategory> listOfComicCategories = [];
+    final List<dynamic> jsonContent = jsonDecode(response.body);
+    jsonContent.forEach((content) {
+      final comicData = content as Map<String, dynamic>;
+      // final comicTagData = comicData['tags'] as List<int>;
+      var comic = ComicCategory(
+        title: comicData['title']['rendered'],
+        summary: _processSummary(comicData['excerpt']['rendered']),
+        imageUrl: _getImageUrl(comicData['featured_media']),
+        // tags: comicTagData.map(_processComicTags).toList());
+      );
+      listOfComicCategories.add(comic);
+    });
+
+    return listOfComicCategories;
+  }
+
   Tags _processComicTags(int id) {
     Tags tag;
     for (final content in tagsData) {

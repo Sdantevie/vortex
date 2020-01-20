@@ -61,7 +61,8 @@ class _HomeState extends State<Home> {
                 controller: _pageController,
                 itemCount: _comicCategories.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return _comicShowcase(context, index);
+                  var category = state is HomeLoadedState ? (state as HomeLoadedState).data.categories : _comicCategories;
+                  return _comicShowcase(context, index, category);
                 },
               ),
             ),
@@ -69,7 +70,7 @@ class _HomeState extends State<Home> {
               height: 20.0,
             ),
             Padding(
-              child: HomeSection(title: 'Trending Now', comics: _comicsCover),
+              child: HomeSection(title: 'Trending Now', comics: state is HomeLoadedState ? (state as HomeLoadedState).data.comics : _comicsCover),
               padding: EdgeInsets.only(left: 16.0, right: 16.0),
             ),
             SizedBox(
@@ -93,7 +94,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  _comicShowcase(BuildContext context, int index) {
+  _comicShowcase(BuildContext context, int index, List<ComicCategory> category) {
     return AnimatedBuilder(
       animation: _pageController,
       builder: (BuildContext context, Widget widget) {
@@ -107,7 +108,7 @@ class _HomeState extends State<Home> {
             child: GestureDetector(
           onTap: () {
             Navigator.of(context).pushNamed('/comic_category_preview',
-                arguments: _comicCategories[index]);
+                arguments: category[index]);
           },
           child: SizedBox(
             height: Curves.easeInOut.transform(value) * 200.0,
@@ -131,11 +132,11 @@ class _HomeState extends State<Home> {
                   ]),
               child: Center(
                 child: Hero(
-                  tag: _comicCategories[index].title,
+                  tag: category[index].title,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
                     child: Image.network(
-                      _comicCategories[index].imageUrl,
+                      category[index].imageUrl,
                       height: 160.0,
                       width: double.infinity,
                       fit: BoxFit.cover,
@@ -150,7 +151,7 @@ class _HomeState extends State<Home> {
               bottom: 40,
               child: Container(
                 child: Text(
-                  _comicCategories[index].title,
+                  category[index].title,
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 18.0,
