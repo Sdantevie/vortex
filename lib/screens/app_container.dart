@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:vortex/blocs/app_bloc/app_states.dart';
 
 import '../blocs/app_bloc/app_bloc.dart';
 import '../blocs/app_bloc/app_events.dart';
@@ -57,7 +58,9 @@ class _AppContainerState extends State<AppContainer>
 
     //ignore: close_sinks
     final AppBloc appBloc = BlocProvider.of<AppBloc>(context);
-    appBloc.add(AppLoadDataEvent());
+    if (!(appBloc.state is AppLoadedState)) {
+      appBloc.add(AppLoadDataEvent());
+    }
 
     return Container(
       decoration: BoxDecoration(

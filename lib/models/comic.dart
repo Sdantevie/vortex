@@ -7,6 +7,7 @@ class Comic {
   final String imageUrl;
   final int id;
   final int featureMedia;
+  final int category;
   final String title;
   final String summary;
   final List<Tags> tags;
@@ -17,6 +18,7 @@ class Comic {
       @required this.title,
       this.id,
       this.featureMedia,
+      this.category,
       this.summary,
       this.tags,
       this.characters});

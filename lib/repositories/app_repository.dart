@@ -59,11 +59,13 @@ class AppRepository {
     jsonContent.forEach((content) {
       final comicData = content as Map<String, dynamic>;
       final comicTagData = comicData['tags'] as List<dynamic>;
+      final String imageUrl = _getImageUrl(comicData['featured_media']);
       var comic = Comic(
-        title: comicData['title']['rendered'],
-        summary: _processSummary(comicData['excerpt']['rendered']),
-        imageUrl: _getImageUrl(comicData['featured_media']),
-         tags: comicTagData.map(_processComicTags).toList());
+          title: comicData['title']['rendered'],
+          category: comicData['categories'][0],
+          summary: _processSummary(comicData['excerpt']['rendered']),
+          imageUrl: imageUrl,
+          tags: comicTagData.map(_processComicTags).toList());
       listOfComics.add(comic);
     });
 

@@ -51,63 +51,69 @@ class _HomeState extends State<Home> {
     final HomeBloc homeBloc =
         HomeBloc(appBloc: BlocProvider.of<AppBloc>(context));
 
-    final List<ComicCategory> categories = getCategories(context);
-
     return BlocBuilder<HomeBloc, HomeState>(
       bloc: homeBloc,
       builder: (context, state) {
-        return SliverList(
-          delegate: SliverChildListDelegate([
-            Container(
-              height: 200,
-              width: double.infinity,
-              child: PageView.builder(
-                controller: _pageController,
-                itemCount: categories.length,
-                itemBuilder: (BuildContext context, int index) { 
-                  return _comicShowcase(context, index, categories);
-                },
+        if (state is HomeLoadedState) {
+          final List<ComicCategory> categories = getCategories(context);
+          return SliverList(
+            delegate: SliverChildListDelegate([
+              Container(
+                height: 200,
+                width: double.infinity,
+                child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: categories.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return _comicShowcase(context, index, categories);
+                  },
+                ),
               ),
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            Padding(
-              child: HomeSection(
-                  title: 'Trending Now',
-                  comics: state is HomeLoadedState
-                      ? _filterByTag(
-                          (state as HomeLoadedState).data.comics, "Trending")
-                      : _comicsCover),
-              padding: EdgeInsets.only(left: 16.0, right: 16.0),
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            Padding(
-              child: HomeSection(
-                  title: 'Latest Release',
-                  comics: state is HomeLoadedState
-                      ? _filterByTag(
-                          (state as HomeLoadedState).data.comics, "latest release")
-                      : _comicsCover),
-              padding: EdgeInsets.only(left: 16.0, right: 16.0),
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            Padding(
-              child: HomeSection(
-                  title: 'Vortex Mini',
-                  comics: state is HomeLoadedState
-                      ? _filterByTag(
-                          (state as HomeLoadedState).data.comics, "Vortex Mini")
-                      : _comicsCover),
-              padding: EdgeInsets.only(left: 16.0, right: 16.0),
-            ),
-          ]),
-          //padding: EdgeInsets.only(top: 0.0, bottom: 8.0),
-        );
+              SizedBox(
+                height: 20.0,
+              ),
+              Padding(
+                child: HomeSection(
+                    title: 'Trending Now',
+                    comics: state is HomeLoadedState
+                        ? _filterByTag(
+                            (state as HomeLoadedState).data.comics, "Trending")
+                        : _comicsCover),
+                padding: EdgeInsets.only(left: 16.0, right: 16.0),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Padding(
+                child: HomeSection(
+                    title: 'Latest Release',
+                    comics: state is HomeLoadedState
+                        ? _filterByTag((state as HomeLoadedState).data.comics,
+                            "latest release")
+                        : _comicsCover),
+                padding: EdgeInsets.only(left: 16.0, right: 16.0),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Padding(
+                child: HomeSection(
+                    title: 'Vortex Mini',
+                    comics: state is HomeLoadedState
+                        ? _filterByTag((state as HomeLoadedState).data.comics,
+                            "Vortex Mini")
+                        : _comicsCover),
+                padding: EdgeInsets.only(left: 16.0, right: 16.0),
+              ),
+            ]),
+            //padding: EdgeInsets.only(top: 0.0, bottom: 8.0),
+          );
+        } else {
+          return SliverFillRemaining(
+              child: Center(
+            child: CircularProgressIndicator(),
+          ));
+        }
       },
     );
   }
@@ -185,11 +191,12 @@ class _HomeState extends State<Home> {
   List<Comic> _filterByTag(List<Comic> comics, String tagName) {
     List<Comic> returnedComic = [];
     comics.forEach((comic) {
-      var seen = comic.tags.firstWhere((tag) => tag.name == tagName, orElse: () => null);
-      if(seen != null){
+      var seen = comic.tags
+          .firstWhere((tag) => tag.name == tagName, orElse: () => null);
+      if (seen != null) {
         returnedComic.add(comic);
       }
-    }); 
+    });
     return returnedComic;
   }
 }
