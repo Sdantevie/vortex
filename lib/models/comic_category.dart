@@ -15,5 +15,5 @@ class ComicCategory {
       @required this.imageUrl,
       this.summary = '',
       this.tags,
-      @required this.comics});
+      this.comics});
 }

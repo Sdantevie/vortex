@@ -47,7 +47,7 @@ class AppRepository {
   List<Tags> _processTags(http.Response response) {
     List<Tags> listOfTags = [];
     final List<dynamic> jsonContent = jsonDecode(response.body);
-    jsonContent.forEach((content){
+    jsonContent.forEach((content) {
       final tagData = content as Map<String, dynamic>;
       var tag = Tags(id: tagData['id'], name: tagData['name']);
       listOfTags.add(tag);
@@ -91,16 +91,16 @@ class AppRepository {
     return 'Hello';
   }
 
-  List<ComicCategory> _processComicCategory(http.Response response){
+  List<ComicCategory> _processComicCategory(http.Response response) {
     List<ComicCategory> listOfComicCategories = [];
     final List<dynamic> jsonContent = jsonDecode(response.body);
     jsonContent.forEach((content) {
-      final comicData = content as Map<String, dynamic>;
+      final comicCategoryData = content as Map<String, dynamic>;
       // final comicTagData = comicData['tags'] as List<int>;
       var comic = ComicCategory(
-        title: comicData['title']['rendered'],
-        summary: _processSummary(comicData['excerpt']['rendered']),
-        imageUrl: _getImageUrl(comicData['featured_media']),
+        title: comicCategoryData['name'],
+        summary: _processSummary(comicCategoryData['description']),
+        //imageUrl: _getImageUrl(comicData['featured_media']),
         // tags: comicTagData.map(_processComicTags).toList());
       );
       listOfComicCategories.add(comic);
