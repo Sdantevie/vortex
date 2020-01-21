@@ -34,8 +34,6 @@ class AppRepository {
           tags: _processTags(response[1]),
           category: _processComicCategory(response[3]),
           comics: comics);
-
-          print(data);
       return data;
 
       // category: comicCategory);
@@ -60,13 +58,12 @@ class AppRepository {
     final List<dynamic> jsonContent = jsonDecode(response.body);
     jsonContent.forEach((content) {
       final comicData = content as Map<String, dynamic>;
-      // final comicTagData = comicData['tags'] as List<int>;
+      final comicTagData = comicData['tags'] as List<dynamic>;
       var comic = Comic(
         title: comicData['title']['rendered'],
         summary: _processSummary(comicData['excerpt']['rendered']),
         imageUrl: _getImageUrl(comicData['featured_media']),
-        // tags: comicTagData.map(_processComicTags).toList());
-      );
+         tags: comicTagData.map(_processComicTags).toList());
       listOfComics.add(comic);
     });
 
@@ -109,11 +106,12 @@ class AppRepository {
     return listOfComicCategories;
   }
 
-  Tags _processComicTags(int id) {
+  Tags _processComicTags(dynamic id) {
+    int tagId = id as int;
     Tags tag;
     for (final content in tagsData) {
       final tagContent = content as Map<String, dynamic>;
-      if (tagContent['id'] == id) {
+      if (tagContent['id'] == tagId) {
         tag = Tags(name: tagContent['name'], id: tagContent['id']);
       }
     }

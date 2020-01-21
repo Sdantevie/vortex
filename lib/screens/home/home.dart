@@ -52,7 +52,6 @@ class _HomeState extends State<Home> {
     return BlocBuilder<HomeBloc, HomeState>(
       bloc: homeBloc,
       builder: (context, state) {
-        print(state);
         return SliverList(
           delegate: SliverChildListDelegate([
             Container(
@@ -62,7 +61,9 @@ class _HomeState extends State<Home> {
                 controller: _pageController,
                 itemCount: _comicCategories.length,
                 itemBuilder: (BuildContext context, int index) {
-                  var category = state is HomeLoadedState ? (state as HomeLoadedState).data.categories : _comicCategories;
+                  var category = state is HomeLoadedState
+                      ? (state as HomeLoadedState).data.categories
+                      : _comicCategories;
                   return _comicShowcase(context, index, category);
                 },
               ),
@@ -71,21 +72,36 @@ class _HomeState extends State<Home> {
               height: 20.0,
             ),
             Padding(
-              child: HomeSection(title: 'Trending Now', comics: state is HomeLoadedState ? (state as HomeLoadedState).data.comics : _comicsCover),
+              child: HomeSection(
+                  title: 'Trending Now',
+                  comics: state is HomeLoadedState
+                      ? _filterByTag(
+                          (state as HomeLoadedState).data.comics, "Trending")
+                      : _comicsCover),
               padding: EdgeInsets.only(left: 16.0, right: 16.0),
             ),
             SizedBox(
               height: 20.0,
             ),
             Padding(
-              child: HomeSection(title: 'Latest Release', comics: _comicsCover),
+              child: HomeSection(
+                  title: 'Latest Release',
+                  comics: state is HomeLoadedState
+                      ? _filterByTag(
+                          (state as HomeLoadedState).data.comics, "latest release")
+                      : _comicsCover),
               padding: EdgeInsets.only(left: 16.0, right: 16.0),
             ),
             SizedBox(
               height: 20.0,
             ),
             Padding(
-              child: HomeSection(title: 'Vortex Mini', comics: _comicsCover),
+              child: HomeSection(
+                  title: 'Vortex Mini',
+                  comics: state is HomeLoadedState
+                      ? _filterByTag(
+                          (state as HomeLoadedState).data.comics, "Vortex Mini")
+                      : _comicsCover),
               padding: EdgeInsets.only(left: 16.0, right: 16.0),
             ),
           ]),
@@ -95,7 +111,8 @@ class _HomeState extends State<Home> {
     );
   }
 
-  _comicShowcase(BuildContext context, int index, List<ComicCategory> category) {
+  _comicShowcase(
+      BuildContext context, int index, List<ComicCategory> category) {
     return AnimatedBuilder(
       animation: _pageController,
       builder: (BuildContext context, Widget widget) {
@@ -162,5 +179,16 @@ class _HomeState extends State<Home> {
         ],
       ),
     );
+  }
+
+  List<Comic> _filterByTag(List<Comic> comics, String tagName) {
+    List<Comic> returnedComic = [];
+    comics.forEach((comic) {
+      var seen = comic.tags.firstWhere((tag) => tag.name == tagName, orElse: () => null);
+      if(seen != null){
+        returnedComic.add(comic);
+      }
+    }); 
+    return returnedComic;
   }
 }
