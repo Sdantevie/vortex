@@ -34,6 +34,8 @@ class AppRepository {
           tags: _processTags(response[1]),
           category: _processComicCategory(response[3]),
           comics: comics);
+
+          print(data);
       return data;
 
       // category: comicCategory);

@@ -52,6 +52,7 @@ class _HomeState extends State<Home> {
     return BlocBuilder<HomeBloc, HomeState>(
       bloc: homeBloc,
       builder: (context, state) {
+        print(state);
         return SliverList(
           delegate: SliverChildListDelegate([
             Container(
