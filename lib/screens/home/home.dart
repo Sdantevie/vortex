@@ -8,6 +8,8 @@ import 'package:vortex/models/comic.dart';
 import 'package:vortex/models/comic_category.dart';
 import 'package:vortex/models/tags.dart';
 
+import '../../models/comic_category.dart';
+import 'category_data.dart';
 import 'home_section.dart';
 
 class Home extends StatefulWidget {
@@ -49,6 +51,8 @@ class _HomeState extends State<Home> {
     final HomeBloc homeBloc =
         HomeBloc(appBloc: BlocProvider.of<AppBloc>(context));
 
+    final List<ComicCategory> categories = getCategories(context);
+
     return BlocBuilder<HomeBloc, HomeState>(
       bloc: homeBloc,
       builder: (context, state) {
@@ -59,12 +63,9 @@ class _HomeState extends State<Home> {
               width: double.infinity,
               child: PageView.builder(
                 controller: _pageController,
-                itemCount: _comicCategories.length,
-                itemBuilder: (BuildContext context, int index) {
-                  var category = state is HomeLoadedState
-                      ? (state as HomeLoadedState).data.categories
-                      : _comicCategories;
-                  return _comicShowcase(context, index, category);
+                itemCount: categories.length,
+                itemBuilder: (BuildContext context, int index) { 
+                  return _comicShowcase(context, index, categories);
                 },
               ),
             ),

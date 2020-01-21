@@ -60,7 +60,7 @@ class ComicPreview extends StatelessWidget {
                         ...comic.tags
                             .map(
                               (tag) => Container(
-                                margin: EdgeInsets.only(right: 8.0),
+                                margin: EdgeInsets.only(right: 8.0, top: 4.0),
                                 decoration: BoxDecoration(
                                     color: Color(0xFFFF691F),
                                     borderRadius: BorderRadius.circular(4.0)),

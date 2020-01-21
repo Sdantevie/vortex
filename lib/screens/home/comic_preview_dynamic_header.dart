@@ -47,7 +47,7 @@ class ComicPreviewDynamicHeader extends SliverPersistentHeaderDelegate {
                     fontFamily: 'OpenSans',
                     fontSize: 32.0,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFFD71786)
+                    color: Colors.white
                         .withOpacity(titleOpacity(shrinkOffset)),
                   ),
                 ),
