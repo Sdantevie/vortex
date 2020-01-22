@@ -25,6 +25,16 @@ List<ComicCategory> getCategories(BuildContext context) {
             '''For we wrestle not against flesh and blood, but against principalities, against powers, against the rulers of the darkness of this world, against spiritual wickedness in high places". - Ephesians 6:12 KJV.''',
         imageUrl:
             'https://vortex247.com/wp-content/uploads/2019/02/slide-agbara-1.jpg'),
+    ComicCategory(imageUrl: 'https://vortex247.com/wp-content/uploads/2019/12/ZODIAC.jpg',
+    summary: '''
+Centuries ago, the Dogon tribe of Mali discovered the sacred scroll of Timbuktu which gifted chosen Dogon children mystical powers of the ZODIAC. However, with great powers come's enemies, a great war spurs between the humble tribe of the DOGON against the great dynasty of Pharoah of Egypt Khufu for the powers and knowledge of the ZODIAC. This is the story of DANKARAN KIETA.
+''', title: 'ZODIAC', comics: _getComics(appBloc, 90), id: 90),
+    ComicCategory(
+      title: 'BADGAIS', 
+      id: 50,
+      summary: '''Dancing with the devil. As supernaturals begin to surface across Nigeria and the rest of the continent, a task force has been put together by the NPF (Nigerian Police Force) to seek the roots to the increased paranormal occurrence. However, even the ones seeking the truth are deeply entangled in this spiritual web.Emi Aago''',
+      imageUrl: 'https://vortex247.com/wp-content/uploads/2019/02/slide-badgais.jpg',
+      comics: _getComics(appBloc, 50) )
   ];
 
   return categories;

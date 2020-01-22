@@ -5,6 +5,7 @@ import 'package:vortex/models/comic_category.dart';
 import '../models/app_data.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
+import 'package:html_unescape/html_unescape.dart';
 
 import '../models/tags.dart';
 
@@ -86,7 +87,7 @@ class AppRepository {
   }
 
   String _processSummary(String summaryData) {
-    return 'Hello';
+    return HtmlUnescape().convert(summaryData);
   }
 
   List<ComicCategory> _processComicCategory(http.Response response) {
