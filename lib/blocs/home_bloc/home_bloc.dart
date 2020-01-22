@@ -16,8 +16,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     appSubscription = appBloc.listen((state) {
       if (state is AppLoadedState) {
         add(HomeLoadDataEvent(
-            comic: (appBloc.state as AppLoadedState).data.comics,
-            category: (appBloc.state as AppLoadedState).data.category));
+            comic: (appBloc.state as AppLoadedState).data.comics));
       }
     });
   }
@@ -28,7 +27,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
     if (event is HomeLoadDataEvent) {
       yield HomeLoadedState(
-          data: HomeData(comics: event.comic, categories: event.category));
+          data: HomeData(comics: event.comic));
     }
   }
 }

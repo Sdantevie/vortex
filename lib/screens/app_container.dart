@@ -10,6 +10,7 @@ import 'characters/character_tab_header.dart';
 import 'favourite/favourite.dart';
 import 'home/home.dart';
 import 'profile/profile_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AppContainer extends StatefulWidget {
   AppContainer({Key key}) : super(key: key);
@@ -88,6 +89,12 @@ class _AppContainerState extends State<AppContainer>
     );
   }
 
+  _launchUrl() async {
+  const url = 'https://vortexcorp.net/shop/';
+  if (await canLaunch(url)) {
+    await launch(url);
+  }
+}
   _buildScrollable() {
     List<dynamic> _views = [
       Home(),
@@ -114,7 +121,7 @@ class _AppContainerState extends State<AppContainer>
             ),
             IconButton(
               icon: Icon(Icons.shopping_basket),
-              onPressed: () {},
+              onPressed: _launchUrl,
               color: Color(0xFFFF691F),
             )
           ],

@@ -15,10 +15,9 @@ class HomeLoadingDataEvent extends HomeEvent {}
 
 class HomeLoadDataEvent extends HomeEvent {
   final List<Comic> comic;
-  final List<ComicCategory> category;
 
-  const HomeLoadDataEvent({@required this.comic, @required this.category});
+  const HomeLoadDataEvent({@required this.comic});
 
   @override
-  List<Object> get props => [comic, category];
+  List<Object> get props => [comic];
 }

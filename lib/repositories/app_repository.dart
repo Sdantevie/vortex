@@ -32,7 +32,6 @@ class AppRepository {
 
       final data = AppData(
           tags: _processTags(response[1]),
-          category: _processComicCategory(response[3]),
           comics: comics);
       return data;
 
