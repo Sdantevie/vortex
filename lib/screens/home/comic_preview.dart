@@ -28,6 +28,16 @@ class ComicPreview extends StatelessWidget {
     return 'https://vortex247.com/wp-content/uploads/2019/12/Folktales-2-Compressed.pdf';
   }
 
+  String _removeAllHtmlTags(String htmlText) {
+    RegExp exp = RegExp(
+      r"<[^>]*>",
+      multiLine: true,
+      caseSensitive: true
+    );
+
+    return htmlText.replaceAll(exp, '');
+  }
+
   _buildScrollable(BuildContext context) {
     return CustomScrollView(
       slivers: <Widget>[
@@ -44,7 +54,7 @@ class ComicPreview extends StatelessWidget {
               Container(
                 padding: EdgeInsets.only(top: 38.0, bottom: 8.0),
                 child: Text(
-                  this.comic.summary,
+                  _removeAllHtmlTags(this.comic.summary).split('...')[0] + '...',
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'OpenSans',
