@@ -2,6 +2,6 @@
 
 ## Comic App
 Screenshots
-[Pestle](https://github.com/Sdantevie/vortex/blob/main/assets/images/pestle.png?raw=true)
+[Pestle](https://raw.githubusercontent.com/Sdantevie/vortex/main/assets/images/pestle.png)
 
-[Home](https://github.com/Sdantevie/vortex/blob/main/assets/images/home.png?raw=true)
+[Home](https://raw.githubusercontent.com/Sdantevie/vortex/blob/main/assets/images/home.png)
